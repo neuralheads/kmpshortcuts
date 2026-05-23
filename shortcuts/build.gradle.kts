@@ -7,6 +7,8 @@ plugins {
 kotlin {
     androidTarget { publishLibraryVariants("release") }
     iosX64(); iosArm64(); iosSimulatorArm64()
+    // JVM target: used only for running commonTest on the host JVM (not published).
+    jvm()
 
     sourceSets {
         commonMain.dependencies {
@@ -16,13 +18,21 @@ kotlin {
             api(libs.androidx.core.ktx)
             api(libs.kotlinx.coroutines.android)
         }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(project(":kmpshortcuts-testing"))
+        }
     }
 }
 
 android {
     namespace  = "com.neuralheads.kmpshortcuts"
     compileSdk = 35
-    defaultConfig { minSdk = 25 }
+    defaultConfig {
+        minSdk = 25
+        consumerProguardFiles("consumer-rules.pro")
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17

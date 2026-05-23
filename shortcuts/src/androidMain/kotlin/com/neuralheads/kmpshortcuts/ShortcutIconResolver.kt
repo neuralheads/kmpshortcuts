@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.graphics.drawable.IconCompat
-import com.neuralheads.kmpshortcuts.ShortcutIcon
 
 /**
  * Resolves a [ShortcutIcon] to an [IconCompat] suitable for [ShortcutInfoCompat].

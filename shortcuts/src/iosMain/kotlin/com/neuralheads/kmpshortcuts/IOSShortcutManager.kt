@@ -25,7 +25,7 @@ import platform.UIKit.UIMutableApplicationShortcutItem
  * // In ApplicationMain or AppDelegate.applicationDidBecomeActive:
  * func applyKMPShortcuts() {
  *     let manager = KMPShortcuts.shared.manager as? IOSShortcutManager
- *     UIApplication.shared.shortcutItems = manager?.pendingShortcutItemsAsSwift()
+ *     UIApplication.shared.shortcutItems = manager?.pendingShortcutItemsSnapshot
  * }
  *
  * // Handle taps:
@@ -33,7 +33,7 @@ import platform.UIKit.UIMutableApplicationShortcutItem
  *     performActionFor shortcutItem: UIApplicationShortcutItem,
  *     completionHandler: @escaping (Bool) -> Void
  * ) {
- *     IOSShortcutManagerKt.handleShortcutItem(shortcutItem)
+ *     IOSShortcutManager.companion.handleShortcutItem(item: shortcutItem)
  *     completionHandler(true)
  * }
  * ```
@@ -60,16 +60,12 @@ class IOSShortcutManager : AppShortcutManager {
     override suspend fun addShortcut(shortcut: ShortcutInfo): Unit =
         mutex.withLock { _cache = (_cache + shortcut).take(maxShortcutCount) }
 
-    override suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo): Unit {
-        val next = mutex.withLock {
+    override suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo): Unit =
+        mutex.withLock {
             val idx = _cache.indexOfFirst { it.id == id }
-            if (idx < 0) return
-            _cache.toMutableList().apply {
-                this[idx] = with(this[idx]) { update() }
-            }.toList()
+            if (idx < 0) return@withLock
+            _cache = _cache.toMutableList().also { it[idx] = it[idx].update() }
         }
-        mutex.withLock { _cache = next }
-    }
 
     override suspend fun removeShortcut(id: String): Unit =
         mutex.withLock { _cache = _cache.filter { it.id != id } }
@@ -102,19 +98,26 @@ class IOSShortcutManager : AppShortcutManager {
     // ── Swift bridge ───────────────────────────────────────────────────────────
 
     /**
-     * Returns the current shortcut list as [UIMutableApplicationShortcutItem]s
+     * Non-suspend snapshot of current shortcuts as [UIMutableApplicationShortcutItem]s,
      * ready to assign to `UIApplication.shared.shortcutItems` from Swift.
      *
      * ```swift
-     * UIApplication.shared.shortcutItems =
-     *     (manager as? IOSShortcutManager)?.pendingShortcutItems() as? [UIApplicationShortcutItem]
+     * UIApplication.shared.shortcutItems = manager.pendingShortcutItemsSnapshot
      * ```
      *
-     * Call this after any suspend operation that mutates shortcuts has completed,
-     * e.g. in `applicationDidBecomeActive` or a coroutine observer.
+     * This property reads the in-memory cache directly. Since iOS shortcut item
+     * assignment always happens on the main thread, this is safe for the
+     * `applicationDidBecomeActive` use case.
      */
-    fun pendingShortcutItems(): List<UIMutableApplicationShortcutItem> =
-        _cache.map { it.toShortcutItem() }
+    val pendingShortcutItemsSnapshot: List<UIMutableApplicationShortcutItem>
+        get() = _cache.map { it.toShortcutItem() }
+
+    /**
+     * Suspend version that reads the cache under the [Mutex].
+     * Prefer [pendingShortcutItemsSnapshot] for synchronous access from Swift.
+     */
+    suspend fun pendingShortcutItems(): List<UIMutableApplicationShortcutItem> =
+        mutex.withLock { _cache.map { it.toShortcutItem() } }
 
     companion object {
         private val _activationFlow = MutableSharedFlow<ShortcutActivationEvent>(
@@ -125,7 +128,7 @@ class IOSShortcutManager : AppShortcutManager {
          * Route shortcut taps from AppDelegate into [observeActivations].
          *
          * ```swift
-         * IOSShortcutManagerKt.handleShortcutItem(shortcutItem)
+         * IOSShortcutManager.companion.handleShortcutItem(item: shortcutItem)
          * ```
          */
         fun handleShortcutItem(item: UIApplicationShortcutItem) {

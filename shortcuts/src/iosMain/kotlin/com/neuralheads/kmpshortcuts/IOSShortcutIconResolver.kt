@@ -2,7 +2,6 @@
 
 package com.neuralheads.kmpshortcuts
 
-import com.neuralheads.kmpshortcuts.ShortcutIcon
 import platform.UIKit.UIApplicationShortcutIcon
 
 /**

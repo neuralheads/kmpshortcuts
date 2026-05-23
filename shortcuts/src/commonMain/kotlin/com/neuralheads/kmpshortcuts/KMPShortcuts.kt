@@ -1,5 +1,7 @@
 package com.neuralheads.kmpshortcuts
 
+import kotlin.concurrent.Volatile
+
 /**
  * Global entry point for KMPShortcuts.
  *
@@ -19,11 +21,23 @@ package com.neuralheads.kmpshortcuts
  */
 object KMPShortcuts {
 
+    /**
+     * Backing field declared `@Volatile` (`kotlin.concurrent.Volatile`) so that a
+     * write from the main thread (Application.onCreate / AppDelegate) is immediately
+     * visible to any background thread that subsequently reads [manager].
+     *
+     * `kotlin.concurrent.Volatile` is the KMP-safe equivalent of `@kotlin.jvm.Volatile`
+     * and is available on all targets since Kotlin 1.8.20.
+     */
+    @Volatile
     private var _manager: AppShortcutManager? = null
 
     /**
      * Register the platform [AppShortcutManager] implementation.
-     * Must be called before any access to [manager].
+     * Must be called exactly once, before any access to [manager].
+     *
+     * Re-initializing with a different implementation is allowed (e.g. in tests)
+     * but is not recommended in production code.
      */
     fun initialize(manager: AppShortcutManager) {
         _manager = manager

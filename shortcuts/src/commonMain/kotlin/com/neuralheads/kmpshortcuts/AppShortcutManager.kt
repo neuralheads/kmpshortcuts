@@ -69,8 +69,8 @@ interface AppShortcutManager {
      * Hot [Flow] that emits a [ShortcutActivationEvent] each time the user
      * taps a shortcut and activates the app.
      *
-     * - Android: feed via [processIntent] from `Activity.onCreate` / `onNewIntent`.
-     * - iOS:     feed automatically by calling `IOSShortcutManager.handleShortcutItem()`
+     * - Android: feed via [AndroidShortcutManager.handleIntent] from `Activity.onCreate` / `onNewIntent`.
+     * - iOS:     feed by calling `IOSShortcutManager.handleShortcutItem()`
      *            from AppDelegate.
      *
      * The flow uses `replay = 0` and `DROP_OLDEST` overflow so it never throws.

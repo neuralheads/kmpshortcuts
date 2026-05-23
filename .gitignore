@@ -1,0 +1,24 @@
+# Gradle build outputs
+.gradle/
+build/
+**/build/
+
+# Local configuration (never commit)
+local.properties
+*.local
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.xml.iml
+
+# macOS
+.DS_Store
+
+# Xcode DerivedData (iOS consumers)
+DerivedData/
+
+# Signing secrets (use env vars or CI secrets instead)
+*.jks
+*.keystore
+local.signing.properties

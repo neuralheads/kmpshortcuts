@@ -7,10 +7,16 @@ plugins {
 kotlin {
     androidTarget { publishLibraryVariants("release") }
     iosX64(); iosArm64(); iosSimulatorArm64()
+    // JVM target: used only for running commonTest on the host JVM (not published).
+    jvm()
 
     sourceSets {
         commonMain.dependencies {
             api(project(":kmpshortcuts"))
+        }
+        commonTest.dependencies {
+            implementation(kotlin("test"))
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
