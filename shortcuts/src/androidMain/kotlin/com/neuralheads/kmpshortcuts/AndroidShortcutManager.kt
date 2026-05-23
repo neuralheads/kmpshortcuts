@@ -80,19 +80,25 @@ class AndroidShortcutManager(
             }
         }
 
-    override suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo): Unit =
+    override suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo): Unit {
+        // Resolve the update outside nested lambdas to avoid Kotlin compiler
+        // receiver-type-mismatch when a ShortcutInfo.()->ShortcutInfo lambda is
+        // captured inside a suspend inline lambda chain (withContext + withLock).
+        val existing = withContext(Dispatchers.Main) {
+            mutex.withLock {
+                ShortcutManagerCompat.getDynamicShortcuts(context).firstOrNull { it.id == id }
+            }
+        } ?: return
+        val updated = with(existing.toShortcutInfo()) { update() }
         withContext(Dispatchers.Main) {
             mutex.withLock {
-                val existing = ShortcutManagerCompat.getDynamicShortcuts(context)
-                    .firstOrNull { it.id == id } ?: return@withContext
-                val current = existing.toShortcutInfo()
-                val updated  = update(current)
                 ShortcutManagerCompat.updateShortcuts(
                     context,
                     listOf(updated.toShortcutInfoCompat(context))
                 )
             }
         }
+    }
 
     override suspend fun removeShortcut(id: String): Unit =
         withContext(Dispatchers.Main) {
