@@ -38,14 +38,17 @@ allprojects {
 subprojects {
     plugins.withId("com.vanniktech.maven.publish") {
         configure<MavenPublishBaseExtension> {
+            val artifactId = if (project.name == "umbrella") "kmpshortcuts"
+                             else "kmpshortcuts-${project.name}"
+            coordinates(
+                groupId    = groupId,
+                artifactId = artifactId,
+                version    = versionName
+            )
             publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
             signAllPublications()
 
             pom {
-                val artifactId =
-                    if (project.name == "umbrella") "kmpshortcuts"
-                    else "kmpshortcuts-${project.name}"
-
                 name.set("KMPShortcuts — $artifactId")
                 description.set(
                     "Kotlin Multiplatform App Shortcuts library. Wraps Android ShortcutManagerCompat " +

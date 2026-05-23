@@ -22,10 +22,3 @@ dependencies {
     api(libs.kotlinx.coroutines.android)
 }
 
-mavenPublishing {
-    coordinates(
-        groupId    = "com.neuralheads",
-        artifactId = "kmpshortcuts-android",
-        version    = project.version.toString()
-    )
-}

@@ -37,10 +37,3 @@ android {
     }
 }
 
-mavenPublishing {
-    coordinates(
-        groupId    = "com.neuralheads",
-        artifactId = "kmpshortcuts",
-        version    = project.version.toString()
-    )
-}

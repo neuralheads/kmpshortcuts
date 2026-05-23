@@ -15,10 +15,3 @@ kotlin {
     }
 }
 
-mavenPublishing {
-    coordinates(
-        groupId    = "com.neuralheads",
-        artifactId = "kmpshortcuts-ios",
-        version    = project.version.toString()
-    )
-}
