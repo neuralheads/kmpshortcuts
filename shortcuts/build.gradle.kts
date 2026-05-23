@@ -12,13 +12,17 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":kmpshortcuts"))
+            api(libs.kotlinx.coroutines.core)
+        }
+        androidMain.dependencies {
+            api(libs.androidx.core.ktx)
+            api(libs.kotlinx.coroutines.android)
         }
     }
 }
 
 android {
-    namespace  = "com.neuralheads.kmpshortcuts.testing"
+    namespace  = "com.neuralheads.kmpshortcuts"
     compileSdk = 35
     defaultConfig { minSdk = 25 }
     compileOptions {
@@ -27,6 +31,8 @@ android {
     }
 }
 
+// mavenPublishing {} runs AFTER the plugins {} block is processed,
+// so vanniktech is fully applied before we touch any of its properties.
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
     signAllPublications()
@@ -38,10 +44,14 @@ mavenPublishing {
     )
 
     pom {
-        name.set("KMPShortcuts Testing")
-        description.set("In-memory FakeAppShortcutManager test double for the KMPShortcuts library.")
+        name.set("KMPShortcuts")
+        description.set(
+            "Kotlin Multiplatform App Shortcuts. Unified API over Android ShortcutManagerCompat " +
+            "and iOS UIApplicationShortcutItem with coroutine-native activation Flow."
+        )
         inceptionYear.set("2024")
         url.set("https://github.com/neuralheads/kmpshortcuts")
+
         licenses {
             license {
                 name.set("Apache License 2.0")
