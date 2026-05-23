@@ -29,17 +29,9 @@ android {
     }
 }
 
-// mavenPublishing {} runs AFTER the plugins {} block is processed,
-// so vanniktech is fully applied before we touch any of its properties.
 mavenPublishing {
     publishToMavenCentral(automaticRelease = true)
     signAllPublications()
-
-    coordinates(
-        groupId    = project.group.toString(),
-        artifactId = project.name,
-        version    = project.version.toString()
-    )
 
     pom {
         name.set("KMPShortcuts")

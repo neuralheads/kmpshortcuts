@@ -29,12 +29,6 @@ mavenPublishing {
     publishToMavenCentral(automaticRelease = true)
     signAllPublications()
 
-    coordinates(
-        groupId    = project.group.toString(),
-        artifactId = project.name,
-        version    = project.version.toString()
-    )
-
     pom {
         name.set("KMPShortcuts Testing")
         description.set("In-memory FakeAppShortcutManager test double for the KMPShortcuts library.")
