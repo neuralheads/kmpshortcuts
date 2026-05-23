@@ -10,7 +10,7 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            api(project(":core"))
+            api(project(":kmpshortcuts-core"))
             api(libs.androidx.core.ktx)
             api(libs.kotlinx.coroutines.android)
         }

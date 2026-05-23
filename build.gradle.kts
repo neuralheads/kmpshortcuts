@@ -4,7 +4,6 @@ import com.vanniktech.maven.publish.SonatypeHost
 plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.android.library)      apply false
-    alias(libs.plugins.kotlin.android)       apply false
     alias(libs.plugins.vanniktech.publish)   apply false
     alias(libs.plugins.dokka)                apply false
 }
@@ -38,18 +37,11 @@ allprojects {
 subprojects {
     plugins.withId("com.vanniktech.maven.publish") {
         configure<MavenPublishBaseExtension> {
-            val artifactId = if (project.name == "umbrella") "kmpshortcuts"
-                             else "kmpshortcuts-${project.name}"
-            coordinates(
-                groupId    = groupId,
-                artifactId = artifactId,
-                version    = versionName
-            )
             publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, automaticRelease = true)
             signAllPublications()
 
             pom {
-                name.set("KMPShortcuts — $artifactId")
+                name.set("KMPShortcuts — ${project.name}")
                 description.set(
                     "Kotlin Multiplatform App Shortcuts library. Wraps Android ShortcutManagerCompat " +
                     "and iOS UIApplicationShortcutItem behind a single, coroutine-native API."

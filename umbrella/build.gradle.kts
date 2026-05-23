@@ -11,15 +11,15 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            api(project(":core"))
-            api(project(":testing"))
+            api(project(":kmpshortcuts-core"))
+            api(project(":kmpshortcuts-testing"))
         }
         androidMain.dependencies {
-            api(project(":android"))
+            api(project(":kmpshortcuts-android"))
         }
         val iosMain by creating {
             dependsOn(commonMain.get())
-            dependencies { api(project(":ios")) }
+            dependencies { api(project(":kmpshortcuts-ios")) }
         }
         val iosX64Main by getting           { dependsOn(iosMain) }
         val iosArm64Main by getting         { dependsOn(iosMain) }
