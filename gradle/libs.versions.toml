@@ -4,7 +4,7 @@ agp                  = "8.5.2"
 coroutines           = "1.9.0"
 androidxCore         = "1.13.1"
 androidxCorektx      = "1.13.1"
-vanniktechPublish    = "0.30.0"
+vanniktechPublish    = "0.36.0"
 dokka                = "1.9.20"
 
 [libraries]
@@ -15,7 +15,6 @@ androidx-core-ktx        = { module = "androidx.core:core-ktx",                 
 
 [plugins]
 kotlin-multiplatform     = { id = "org.jetbrains.kotlin.multiplatform",    version.ref = "kotlin" }
-kotlin-android           = { id = "org.jetbrains.kotlin.android",          version.ref = "kotlin" }
 android-library          = { id = "com.android.library",                   version.ref = "agp" }
 vanniktech-publish       = { id = "com.vanniktech.maven.publish",          version.ref = "vanniktechPublish" }
 dokka                    = { id = "org.jetbrains.dokka",                   version.ref = "dokka" }
