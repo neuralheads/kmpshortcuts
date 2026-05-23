@@ -1,9 +1,21 @@
 plugins {
+    alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.vanniktech.publish)
 }
 apply(from = rootProject.file("gradle/publish.gradle.kts"))
+
+kotlin {
+    androidTarget { publishLibraryVariants("release") }
+
+    sourceSets {
+        androidMain.dependencies {
+            api(project(":core"))
+            api(libs.androidx.core.ktx)
+            api(libs.kotlinx.coroutines.android)
+        }
+    }
+}
 
 android {
     namespace  = "com.neuralheads.kmpshortcuts.android"
@@ -13,12 +25,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-    kotlinOptions { jvmTarget = "17" }
 }
-
-dependencies {
-    api(project(":core"))
-    api(libs.androidx.core.ktx)
-    api(libs.kotlinx.coroutines.android)
-}
-
