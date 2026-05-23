@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.0-alpha02] — 2026-05-24
+
+All fixes from the full audit applied on top of the original alpha01.
+
+### Changed
+- Kotlin `2.0.21` → `2.1.21`, AGP `8.5.2` → `8.9.0`, Dokka `1.9.20` → `2.0.0`
+- `handleIntent()` — multi-key detection for maximum launcher compatibility
+- `removeShortcut()` / `clearShortcuts()` — now guarded by `Mutex` (race condition fix)
+- Added `pendingShortcutItemsSnapshot` non-suspend property for Swift
+- Added ProGuard `consumer-rules.pro`
+- Added `publish.ps1` for one-click Windows deployment
+- CI fixed: triggers on `master` (actual default branch)
+
+---
+
 ## [0.1.0-alpha01] — 2026-05-24
 
 ### Added
