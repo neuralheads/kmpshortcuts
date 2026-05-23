@@ -1,4 +1,4 @@
-package com.neuralheads.kmpshortcuts.android
+package com.neuralheads.kmpshortcuts
 
 import android.content.Context
 import android.graphics.BitmapFactory

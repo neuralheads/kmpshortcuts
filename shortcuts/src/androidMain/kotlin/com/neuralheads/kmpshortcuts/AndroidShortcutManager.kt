@@ -1,4 +1,4 @@
-package com.neuralheads.kmpshortcuts.android
+package com.neuralheads.kmpshortcuts
 
 import android.content.Context
 import android.content.Intent
@@ -86,7 +86,7 @@ class AndroidShortcutManager(
                 val existing = ShortcutManagerCompat.getDynamicShortcuts(context)
                     .firstOrNull { it.id == id } ?: return@withContext
                 val current = existing.toShortcutInfo()
-                val updated  = current.update()
+                val updated  = update(current)
                 ShortcutManagerCompat.updateShortcuts(
                     context,
                     listOf(updated.toShortcutInfoCompat(context))

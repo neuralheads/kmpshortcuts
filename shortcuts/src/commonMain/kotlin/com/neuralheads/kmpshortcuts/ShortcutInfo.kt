@@ -1,6 +1,5 @@
 package com.neuralheads.kmpshortcuts
 
-import kotlinx.serialization.Serializable
 
 /**
  * Describes a single app shortcut displayed on long-press of the app icon.

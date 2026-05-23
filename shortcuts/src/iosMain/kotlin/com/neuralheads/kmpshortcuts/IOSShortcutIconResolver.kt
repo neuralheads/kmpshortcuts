@@ -1,6 +1,6 @@
 @file:OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
 
-package com.neuralheads.kmpshortcuts.ios
+package com.neuralheads.kmpshortcuts
 
 import com.neuralheads.kmpshortcuts.ShortcutIcon
 import platform.UIKit.UIApplicationShortcutIcon

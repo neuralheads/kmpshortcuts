@@ -1,6 +1,6 @@
 @file:OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
 
-package com.neuralheads.kmpshortcuts.ios
+package com.neuralheads.kmpshortcuts
 
 import com.neuralheads.kmpshortcuts.AppShortcutManager
 import com.neuralheads.kmpshortcuts.ShortcutActivationEvent
@@ -23,7 +23,7 @@ import platform.UIKit.UIMutableApplicationShortcutItem
  * ## Setup in AppDelegate (Swift)
  * ```swift
  * // AppDelegate.swift
- * import kmpshortcuts_ios
+ * import kmpshortcuts
  *
  * func application(
  *     _ application: UIApplication,
@@ -64,8 +64,7 @@ class IOSShortcutManager : AppShortcutManager {
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 val trimmed = shortcuts.take(maxShortcutCount)
-                UIApplication.sharedApplication.shortcutItems =
-                    trimmed.map { it.toShortcutItem() }
+                setItems(trimmed.map { it.toShortcutItem() })
             }
         }
 
@@ -74,8 +73,7 @@ class IOSShortcutManager : AppShortcutManager {
             mutex.withLock {
                 val existing = currentItems()
                 val updated  = (existing + shortcut).take(maxShortcutCount)
-                UIApplication.sharedApplication.shortcutItems =
-                    updated.map { it.toShortcutItem() }
+                setItems(updated.map { it.toShortcutItem() })
             }
         }
 
@@ -83,9 +81,8 @@ class IOSShortcutManager : AppShortcutManager {
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 val existing = currentItems()
-                val updatedList = existing.map { if (it.id == id) it.update() else it }
-                UIApplication.sharedApplication.shortcutItems =
-                    updatedList.map { it.toShortcutItem() }
+                val updatedList = existing.map { if (it.id == id) update(it) else it }
+                setItems(updatedList.map { it.toShortcutItem() })
             }
         }
 
@@ -93,14 +90,13 @@ class IOSShortcutManager : AppShortcutManager {
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 val filtered = currentItems().filter { it.id != id }
-                UIApplication.sharedApplication.shortcutItems =
-                    filtered.map { it.toShortcutItem() }
+                setItems(filtered.map { it.toShortcutItem() })
             }
         }
 
     override suspend fun clearShortcuts(): Unit =
         withContext(Dispatchers.Main) {
-            UIApplication.sharedApplication.shortcutItems = emptyList<Any?>()
+            setItems(emptyList())
         }
 
     override suspend fun getShortcuts(): List<ShortcutInfo> =
@@ -112,11 +108,10 @@ class IOSShortcutManager : AppShortcutManager {
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 // iOS has no API equivalent — re-insert at index 0 to bump rank
-                val items   = currentItems()
-                val target  = items.firstOrNull { it.id == shortcutId } ?: return@withLock
+                val items     = currentItems()
+                val target    = items.firstOrNull { it.id == shortcutId } ?: return@withLock
                 val reordered = listOf(target) + items.filter { it.id != shortcutId }
-                UIApplication.sharedApplication.shortcutItems =
-                    reordered.map { it.toShortcutItem() }
+                setItems(reordered.map { it.toShortcutItem() })
             }
         }
 
@@ -133,10 +128,22 @@ class IOSShortcutManager : AppShortcutManager {
 
     // ── Helpers ────────────────────────────────────────────────────────────────
 
-    private fun currentItems(): List<ShortcutInfo> =
-        UIApplication.sharedApplication.shortcutItems
+    /**
+     * Sets shortcutItems via KVC to avoid a Kotlin/Native UIKit interop binding
+     * issue where the `shortcutItems` property setter is not exposed as a var.
+     * KVC delegates to the underlying ObjC `setShortcutItems:` setter.
+     */
+    private fun setItems(items: List<UIMutableApplicationShortcutItem>) {
+        UIApplication.sharedApplication.setValue(items, forKey = "shortcutItems")
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun currentItems(): List<ShortcutInfo> {
+        val raw = UIApplication.sharedApplication.valueForKey("shortcutItems")
+        return (raw as? List<*>)
             ?.mapNotNull { (it as? UIApplicationShortcutItem)?.toShortcutInfo() }
             ?: emptyList()
+    }
 
     companion object {
         private val _activationFlow = MutableSharedFlow<ShortcutActivationEvent>(
