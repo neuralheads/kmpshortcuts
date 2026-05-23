@@ -29,10 +29,10 @@ android {
     }
 }
 
+// Publishing target, automatic release, and signing are all configured via
+// gradle.properties (SONATYPE_HOST / SONATYPE_AUTOMATIC_RELEASE / RELEASE_SIGNING_ENABLED)
+// so vanniktech can finalize publishingType during apply() without conflict.
 mavenPublishing {
-    publishToMavenCentral(automaticRelease = true)
-    signAllPublications()
-
     pom {
         name.set("KMPShortcuts")
         description.set(

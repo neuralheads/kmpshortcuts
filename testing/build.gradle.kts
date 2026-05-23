@@ -26,9 +26,6 @@ android {
 }
 
 mavenPublishing {
-    publishToMavenCentral(automaticRelease = true)
-    signAllPublications()
-
     pom {
         name.set("KMPShortcuts Testing")
         description.set("In-memory FakeAppShortcutManager test double for the KMPShortcuts library.")
