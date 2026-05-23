@@ -31,12 +31,12 @@ Add to your shared module's `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.neuralheads:kmpshortcuts:0.1.0-alpha02")
+            implementation("com.neuralheads:kmpshortcuts:0.1.0-alpha03")
         }
 
         // Test double — zero platform dependencies
         commonTest.dependencies {
-            implementation("com.neuralheads:kmpshortcuts-testing:0.1.0-alpha02")
+            implementation("com.neuralheads:kmpshortcuts-testing:0.1.0-alpha03")
         }
     }
 }

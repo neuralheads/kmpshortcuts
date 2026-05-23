@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.0-alpha03] — 2026-05-24
+
+### Fixed
+- **Critical:** iOS native klib artifacts (`iosArm64`, `iosX64`, `iosSimulatorArm64`) were missing
+  from `0.1.0-alpha02`. The Gradle module metadata referenced them but they returned 404, causing
+  resolution failure for any project with iOS targets. This version is built on macOS via GitHub
+  Actions, producing all iOS klibs correctly.
+
+---
+
 ## [0.1.0-alpha02] — 2026-05-24
 
 All fixes from the full audit applied on top of the original alpha01.
