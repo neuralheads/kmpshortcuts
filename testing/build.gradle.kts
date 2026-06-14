@@ -22,9 +22,9 @@ kotlin {
 }
 
 android {
-    namespace  = "com.neuralheads.kmpshortcuts.testing"
+    namespace  = "io.neuralheads.kmpshortcuts.testing"
     compileSdk = 35
-    defaultConfig { minSdk = 25 }
+    defaultConfig { minSdk = 23 }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -35,7 +35,7 @@ mavenPublishing {
     pom {
         name.set("KMPShortcuts Testing")
         description.set("In-memory FakeAppShortcutManager test double for the KMPShortcuts library.")
-        inceptionYear.set("2024")
+        inceptionYear.set("2026")
         url.set("https://github.com/neuralheads/kmpshortcuts")
         licenses {
             license {

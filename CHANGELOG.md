@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.0-alpha04] — 2026-06-14
+
+### Changed
+- Migrated package group and name from `com.neuralheads.kmpshortcuts` to `io.neuralheads.kmpshortcuts`.
+- Lowered Android `minSdk` to 23 (was 25).
+- Bundled fallback Material Design icons locally in Android resources.
+- Fixed JDK 21 compatibility issue with `removeLast()`.
+
+---
+
 ## [0.1.0-alpha03] — 2026-05-24
 
 ### Fixed

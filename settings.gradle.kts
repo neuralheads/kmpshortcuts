@@ -22,3 +22,6 @@ project(":kmpshortcuts").projectDir = file("shortcuts")
 
 include(":kmpshortcuts-testing")
 project(":kmpshortcuts-testing").projectDir = file("testing")
+
+include(":kmpshortcuts-sample")
+project(":kmpshortcuts-sample").projectDir = file("sample")

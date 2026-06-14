@@ -1,6 +1,6 @@
 # KMPShortcuts
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.neuralheads/kmpshortcuts)](https://central.sonatype.com/artifact/com.neuralheads/kmpshortcuts)
+[![Maven Central](https://img.shields.io/maven-central/v/io.neuralheads/kmpshortcuts)](https://central.sonatype.com/artifact/io.neuralheads/kmpshortcuts)
 [![CI](https://github.com/neuralheads/kmpshortcuts/actions/workflows/ci.yml/badge.svg)](https://github.com/neuralheads/kmpshortcuts/actions/workflows/ci.yml)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.1.21-7F52FF.svg)](https://kotlinlang.org)
@@ -31,14 +31,22 @@ Add to your shared module's `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.neuralheads:kmpshortcuts:0.1.0-alpha03")
+            implementation("io.neuralheads:kmpshortcuts:0.1.0-alpha04")
         }
 
         // Test double — zero platform dependencies
         commonTest.dependencies {
-            implementation("com.neuralheads:kmpshortcuts-testing:0.1.0-alpha03")
+            implementation("io.neuralheads:kmpshortcuts-testing:0.1.0-alpha04")
         }
     }
+}
+```
+
+And to your `androidApp` module's `build.gradle.kts` (required for `AndroidShortcutManager` platform initialization):
+
+```kotlin
+dependencies {
+    implementation("io.neuralheads:kmpshortcuts:0.1.0-alpha04")
 }
 ```
 
@@ -282,8 +290,8 @@ class ShortcutsViewModelTest {
 
 | Artifact | Description |
 |----------|-------------|
-| `com.neuralheads:kmpshortcuts` | Core library — `commonMain` + `androidMain` + `iosMain` |
-| `com.neuralheads:kmpshortcuts-testing` | `FakeAppShortcutManager` — zero-dependency test double |
+| `io.neuralheads:kmpshortcuts` | Core library — `commonMain` + `androidMain` + `iosMain` |
+| `io.neuralheads:kmpshortcuts-testing` | `FakeAppShortcutManager` — zero-dependency test double |
 
 ---
 
@@ -292,7 +300,7 @@ class ShortcutsViewModelTest {
 | Tool | Version |
 |------|---------|
 | Kotlin | 2.1.21+ |
-| Android `minSdk` | 25 |
+| Android `minSdk` | 23 |
 | Android `compileSdk` | 35 |
 | iOS targets | `iosX64`, `iosArm64`, `iosSimulatorArm64` |
 | Gradle | 8.x with version catalog support |
@@ -310,7 +318,7 @@ See [RELEASING.md](RELEASING.md) for the release process.
 ## License
 
 ```
-Copyright 2024 KMPShortcuts Contributors
+Copyright 2026 NeuralHeads
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

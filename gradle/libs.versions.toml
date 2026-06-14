@@ -12,9 +12,13 @@ kotlinx-coroutines-core    = { module = "org.jetbrains.kotlinx:kotlinx-coroutine
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android",    version.ref = "coroutines" }
 kotlinx-coroutines-test    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test",       version.ref = "coroutines" }
 androidx-core-ktx          = { module = "androidx.core:core-ktx",                              version.ref = "androidxCorektx" }
+appcompat                  = { module = "androidx.appcompat:appcompat",                         version = "1.7.0" }
+material                   = { module = "com.google.android.material:material",                 version = "1.12.0" }
 
 [plugins]
 kotlin-multiplatform     = { id = "org.jetbrains.kotlin.multiplatform",    version.ref = "kotlin" }
 android-library          = { id = "com.android.library",                   version.ref = "agp" }
+android-application      = { id = "com.android.application",               version.ref = "agp" }
+kotlin-android           = { id = "org.jetbrains.kotlin.android",          version.ref = "kotlin" }
 vanniktech-publish       = { id = "com.vanniktech.maven.publish",          version.ref = "vanniktechPublish" }
 dokka                    = { id = "org.jetbrains.dokka",                   version.ref = "dokka" }

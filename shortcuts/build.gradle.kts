@@ -27,10 +27,10 @@ kotlin {
 }
 
 android {
-    namespace  = "com.neuralheads.kmpshortcuts"
+    namespace  = "io.neuralheads.kmpshortcuts"
     compileSdk = 35
     defaultConfig {
-        minSdk = 25
+        minSdk = 23
         consumerProguardFiles("consumer-rules.pro")
     }
     compileOptions {
@@ -49,7 +49,7 @@ mavenPublishing {
             "Kotlin Multiplatform App Shortcuts. Unified API over Android ShortcutManagerCompat " +
             "and iOS UIApplicationShortcutItem with coroutine-native activation Flow."
         )
-        inceptionYear.set("2024")
+        inceptionYear.set("2026")
         url.set("https://github.com/neuralheads/kmpshortcuts")
 
         licenses {
