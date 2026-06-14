@@ -11,7 +11,7 @@ plugins {
 }
 
 val versionName = properties["VERSION_NAME"]?.toString() ?: "0.1.0-alpha04"
-val groupId     = properties["GROUP"]?.toString()        ?: "io.neuralheads"
+val groupId     = properties["GROUP"]?.toString()        ?: "com.neuralheads"
 
 allprojects {
     group   = groupId

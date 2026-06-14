@@ -56,7 +56,7 @@ git push origin main --tags
 
 ### 5. Verify on Maven Central
 
-Check [central.sonatype.com](https://central.sonatype.com/artifact/io.neuralheads/kmpshortcuts)
+Check [central.sonatype.com](https://central.sonatype.com/artifact/com.neuralheads/kmpshortcuts)
 for the new version (propagation takes ~10–30 minutes).
 
 ### 6. Create a GitHub Release

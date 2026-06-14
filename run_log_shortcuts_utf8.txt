@@ -1,0 +1,537 @@
+﻿Publish all modules	Set up job	∩╗┐2026-06-14T19:49:11.2361530Z Current runner version: '2.335.1'
+Publish all modules	Set up job	2026-06-14T19:49:11.2402860Z ##[group]Runner Image Provisioner
+Publish all modules	Set up job	2026-06-14T19:49:11.2403580Z Hosted Compute Agent
+Publish all modules	Set up job	2026-06-14T19:49:11.2403980Z Version: 20260520.533
+Publish all modules	Set up job	2026-06-14T19:49:11.2404400Z Commit: 189110e25284a9812c124fd27b339e2fb4f2f9db
+Publish all modules	Set up job	2026-06-14T19:49:11.2404880Z Build Date: 2026-05-20T17:44:04Z
+Publish all modules	Set up job	2026-06-14T19:49:11.2405330Z Worker ID: {d1a393a3-cffb-40e0-9b43-283850da34eb}
+Publish all modules	Set up job	2026-06-14T19:49:11.2405800Z Azure Region: westus
+Publish all modules	Set up job	2026-06-14T19:49:11.2406180Z ##[endgroup]
+Publish all modules	Set up job	2026-06-14T19:49:11.2407330Z ##[group]Operating System
+Publish all modules	Set up job	2026-06-14T19:49:11.2407900Z macOS
+Publish all modules	Set up job	2026-06-14T19:49:11.2408350Z 15.7.7
+Publish all modules	Set up job	2026-06-14T19:49:11.2408690Z 24G720
+Publish all modules	Set up job	2026-06-14T19:49:11.2409090Z ##[endgroup]
+Publish all modules	Set up job	2026-06-14T19:49:11.2409480Z ##[group]Runner Image
+Publish all modules	Set up job	2026-06-14T19:49:11.2409880Z Image: macos-15-arm64
+Publish all modules	Set up job	2026-06-14T19:49:11.2410280Z Version: 20260527.0100.1
+Publish all modules	Set up job	2026-06-14T19:49:11.2411070Z Included Software: https://github.com/actions/runner-images/blob/macos-15-arm64/20260527.0100/images/macos/macos-15-arm64-Readme.md
+Publish all modules	Set up job	2026-06-14T19:49:11.2412340Z Image Release: https://github.com/actions/runner-images/releases/tag/macos-15-arm64%2F20260527.0100
+Publish all modules	Set up job	2026-06-14T19:49:11.2413050Z ##[endgroup]
+Publish all modules	Set up job	2026-06-14T19:49:11.2413930Z ##[group]GITHUB_TOKEN Permissions
+Publish all modules	Set up job	2026-06-14T19:49:11.2416680Z Contents: read
+Publish all modules	Set up job	2026-06-14T19:49:11.2417160Z Metadata: read
+Publish all modules	Set up job	2026-06-14T19:49:11.2417540Z Packages: read
+Publish all modules	Set up job	2026-06-14T19:49:11.2417930Z ##[endgroup]
+Publish all modules	Set up job	2026-06-14T19:49:11.2421570Z Secret source: Actions
+Publish all modules	Set up job	2026-06-14T19:49:11.2422580Z Prepare workflow directory
+Publish all modules	Set up job	2026-06-14T19:49:11.2708020Z Prepare all required actions
+Publish all modules	Set up job	2026-06-14T19:49:11.2739000Z Getting action download info
+Publish all modules	Set up job	2026-06-14T19:49:11.6870050Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Publish all modules	Set up job	2026-06-14T19:49:12.1098860Z Download action repository 'actions/setup-java@v4' (SHA:c1e323688fd81a25caa38c78aa6df2d33d3e20d9)
+Publish all modules	Set up job	2026-06-14T19:49:12.6581780Z Download action repository 'gradle/actions@v3' (SHA:d9c87d481d55275bb5441eef3fe0e46805f9ef70)
+Publish all modules	Set up job	2026-06-14T19:49:13.4031970Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+Publish all modules	Set up job	2026-06-14T19:49:13.6859850Z Complete job name: Publish all modules
+Publish all modules	Checkout	∩╗┐2026-06-14T19:49:13.7526170Z ##[group]Run actions/checkout@v4
+Publish all modules	Checkout	2026-06-14T19:49:13.7529100Z with:
+Publish all modules	Checkout	2026-06-14T19:49:13.7529800Z   fetch-depth: 0
+Publish all modules	Checkout	2026-06-14T19:49:13.7530580Z   repository: neuralheads/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:13.7538370Z   token: ***
+Publish all modules	Checkout	2026-06-14T19:49:13.7538990Z   ssh-strict: true
+Publish all modules	Checkout	2026-06-14T19:49:13.7539590Z   ssh-user: git
+Publish all modules	Checkout	2026-06-14T19:49:13.7540180Z   persist-credentials: true
+Publish all modules	Checkout	2026-06-14T19:49:13.7540830Z   clean: true
+Publish all modules	Checkout	2026-06-14T19:49:13.7541450Z   sparse-checkout-cone-mode: true
+Publish all modules	Checkout	2026-06-14T19:49:13.7542160Z   fetch-tags: false
+Publish all modules	Checkout	2026-06-14T19:49:13.7542770Z   show-progress: true
+Publish all modules	Checkout	2026-06-14T19:49:13.7543400Z   lfs: false
+Publish all modules	Checkout	2026-06-14T19:49:13.7543990Z   submodules: false
+Publish all modules	Checkout	2026-06-14T19:49:13.7544590Z   set-safe-directory: true
+Publish all modules	Checkout	2026-06-14T19:49:13.7545760Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:14.1047480Z Syncing repository: neuralheads/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:14.1051430Z ##[group]Getting Git version info
+Publish all modules	Checkout	2026-06-14T19:49:14.1053210Z Working directory is '/Users/runner/work/kmpshortcuts/kmpshortcuts'
+Publish all modules	Checkout	2026-06-14T19:49:14.1054760Z [command]/opt/homebrew/bin/git version
+Publish all modules	Checkout	2026-06-14T19:49:14.1393910Z git version 2.54.0
+Publish all modules	Checkout	2026-06-14T19:49:14.1439270Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:14.1445660Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/9dfac9e4-a246-4e17-a34b-efae871c42a2/.gitconfig'
+Publish all modules	Checkout	2026-06-14T19:49:14.1451090Z Temporarily overriding HOME='/Users/runner/work/_temp/9dfac9e4-a246-4e17-a34b-efae871c42a2' before making global git config changes
+Publish all modules	Checkout	2026-06-14T19:49:14.1452960Z Adding repository directory to the temporary git global config as a safe directory
+Publish all modules	Checkout	2026-06-14T19:49:14.1456150Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/kmpshortcuts/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:14.1596970Z Deleting the contents of '/Users/runner/work/kmpshortcuts/kmpshortcuts'
+Publish all modules	Checkout	2026-06-14T19:49:14.1602170Z ##[group]Initializing the repository
+Publish all modules	Checkout	2026-06-14T19:49:14.1609970Z [command]/opt/homebrew/bin/git init /Users/runner/work/kmpshortcuts/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:14.1906050Z hint: Using 'master' as the name for the initial branch. This default branch name
+Publish all modules	Checkout	2026-06-14T19:49:14.1926370Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Publish all modules	Checkout	2026-06-14T19:49:14.1934260Z hint: to use in all of your new repositories, which will suppress this warning,
+Publish all modules	Checkout	2026-06-14T19:49:14.1935510Z hint: call:
+Publish all modules	Checkout	2026-06-14T19:49:14.1936090Z hint:
+Publish all modules	Checkout	2026-06-14T19:49:14.1936770Z hint: 	git config --global init.defaultBranch <name>
+Publish all modules	Checkout	2026-06-14T19:49:14.1937580Z hint:
+Publish all modules	Checkout	2026-06-14T19:49:14.1938340Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Publish all modules	Checkout	2026-06-14T19:49:14.1939530Z hint: 'development'. The just-created branch can be renamed via this command:
+Publish all modules	Checkout	2026-06-14T19:49:14.1940500Z hint:
+Publish all modules	Checkout	2026-06-14T19:49:14.1941080Z hint: 	git branch -m <name>
+Publish all modules	Checkout	2026-06-14T19:49:14.1941740Z hint:
+Publish all modules	Checkout	2026-06-14T19:49:14.1942610Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Publish all modules	Checkout	2026-06-14T19:49:14.1943970Z Initialized empty Git repository in /Users/runner/work/kmpshortcuts/kmpshortcuts/.git/
+Publish all modules	Checkout	2026-06-14T19:49:14.1946680Z [command]/opt/homebrew/bin/git remote add origin https://github.com/neuralheads/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:14.2023500Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:14.2024670Z ##[group]Disabling automatic garbage collection
+Publish all modules	Checkout	2026-06-14T19:49:14.2025650Z [command]/opt/homebrew/bin/git config --local gc.auto 0
+Publish all modules	Checkout	2026-06-14T19:49:14.2098590Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:14.2099670Z ##[group]Setting up auth
+Publish all modules	Checkout	2026-06-14T19:49:14.2103350Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Publish all modules	Checkout	2026-06-14T19:49:14.2178600Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Publish all modules	Checkout	2026-06-14T19:49:14.3443930Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Publish all modules	Checkout	2026-06-14T19:49:14.3569010Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Publish all modules	Checkout	2026-06-14T19:49:14.4712020Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Publish all modules	Checkout	2026-06-14T19:49:14.4721060Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Publish all modules	Checkout	2026-06-14T19:49:14.5799040Z [command]/opt/homebrew/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Publish all modules	Checkout	2026-06-14T19:49:14.5885390Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:14.5886080Z ##[group]Fetching the repository
+Publish all modules	Checkout	2026-06-14T19:49:14.5889750Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+Publish all modules	Checkout	2026-06-14T19:49:15.2154670Z From https://github.com/neuralheads/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:15.2160850Z  * [new branch]      master         -> origin/master
+Publish all modules	Checkout	2026-06-14T19:49:15.2162800Z  * [new tag]         v0.1.0-alpha01 -> v0.1.0-alpha01
+Publish all modules	Checkout	2026-06-14T19:49:15.2164080Z  * [new tag]         v0.1.0-alpha03 -> v0.1.0-alpha03
+Publish all modules	Checkout	2026-06-14T19:49:15.2166170Z  * [new tag]         v0.1.0-alpha04 -> v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.2253260Z [command]/opt/homebrew/bin/git tag --list v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.2344420Z v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.2355550Z [command]/opt/homebrew/bin/git rev-parse refs/tags/v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.2412020Z 72c2ba3836de93639af23fe9f2bf3cd324002008
+Publish all modules	Checkout	2026-06-14T19:49:15.2421500Z [command]/opt/homebrew/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +781b26de59035d8976c105dd00f3c5b48f699566:refs/tags/v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.2597430Z From https://github.com/neuralheads/kmpshortcuts
+Publish all modules	Checkout	2026-06-14T19:49:15.2598420Z  t [tag update]      781b26de59035d8976c105dd00f3c5b48f699566 -> v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.2688390Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:15.2689240Z ##[group]Determining the checkout info
+Publish all modules	Checkout	2026-06-14T19:49:15.2691000Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:15.2696350Z [command]/opt/homebrew/bin/git sparse-checkout disable
+Publish all modules	Checkout	2026-06-14T19:49:15.2773370Z [command]/opt/homebrew/bin/git config --local --unset-all extensions.worktreeConfig
+Publish all modules	Checkout	2026-06-14T19:49:15.2835750Z ##[group]Checking out the ref
+Publish all modules	Checkout	2026-06-14T19:49:15.2838020Z [command]/opt/homebrew/bin/git checkout --progress --force refs/tags/v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.3144180Z HEAD is now at 781b26d Migrate package to io.neuralheads.kmpshortcuts, lower minSdk to 23, add local resource icons, fix JDK 21 compatibility issues, and prepare release v0.1.0-alpha04
+Publish all modules	Checkout	2026-06-14T19:49:15.3175180Z ##[endgroup]
+Publish all modules	Checkout	2026-06-14T19:49:15.3352500Z [command]/opt/homebrew/bin/git log -1 --format=%H
+Publish all modules	Checkout	2026-06-14T19:49:15.3428520Z 781b26de59035d8976c105dd00f3c5b48f699566
+Publish all modules	Set up JDK 17	∩╗┐2026-06-14T19:49:15.3679530Z ##[group]Run actions/setup-java@v4
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3681590Z with:
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3681820Z   java-version: 17
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3694000Z   distribution: temurin
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3694290Z   java-package: jdk
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3694520Z   check-latest: false
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3694740Z   server-id: github
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3694970Z   server-username: GITHUB_ACTOR
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3695230Z   server-password: GITHUB_TOKEN
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3695480Z   overwrite-settings: true
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3695720Z   job-status: success
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3699450Z   token: ***
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.3699720Z ##[endgroup]
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5552400Z ##[group]Installed distributions
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5601400Z Resolved Java 17.0.19+10 from tool-cache
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5603170Z Setting Java 17.0.19+10 as the default
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5615190Z Creating toolchains.xml for JDK version 17 from temurin
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5701740Z Writing to /Users/runner/.m2/toolchains.xml
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5706790Z 
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5737480Z Java configuration:
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5738090Z   Distribution: temurin
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5738980Z   Version: 17.0.19+10
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5739480Z   Path: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5739890Z 
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5740440Z ##[endgroup]
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5757930Z Creating settings.xml with server-id: github
+Publish all modules	Set up JDK 17	2026-06-14T19:49:15.5758370Z Writing to /Users/runner/.m2/settings.xml
+Publish all modules	Set up Gradle	∩╗┐2026-06-14T19:49:15.5924870Z ##[group]Run gradle/actions/setup-gradle@v3
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5925250Z with:
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5925480Z   cache-read-only: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5925770Z   cache-disabled: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5926040Z   cache-write-only: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5926310Z   cache-overwrite-existing: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5926660Z   gradle-home-cache-includes: caches
+Publish all modules	Set up Gradle	notifications
+Publish all modules	Set up Gradle	
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5927050Z   gradle-home-cache-cleanup: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5927370Z   add-job-summary: always
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5927670Z   add-job-summary-as-pr-comment: never
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5927980Z   dependency-graph: disabled
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5928330Z   dependency-graph-continue-on-failure: true
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5928660Z   build-scan-publish: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5928980Z   validate-wrappers: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5929260Z   generate-job-summary: true
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5929560Z   gradle-home-cache-strict-match: false
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5929860Z   workflow-job-context: null
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5932500Z   github-token: ***
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5932860Z env:
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5933260Z   JAVA_HOME: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5945130Z   JAVA_HOME_17_ARM64: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Set up Gradle	2026-06-14T19:49:15.5945730Z ##[endgroup]
+Publish all modules	Set up Gradle	2026-06-14T19:49:16.2528870Z Merged default JDK locations into /Users/runner/.m2/toolchains.xml
+Publish all modules	Set up Gradle	2026-06-14T19:49:16.2533090Z ##[group]Restore Gradle state from cache
+Publish all modules	Set up Gradle	2026-06-14T19:49:16.4097600Z ##[warning]Failed to restore gradle-home-v1|macOS|publish[1f937033cd26dccd30ed77bb723adde9]-781b26de59035d8976c105dd00f3c5b48f699566: Error: Cache service responded with 400
+Publish all modules	Set up Gradle	2026-06-14T19:49:16.4115130Z Gradle User Home cache not found. Will initialize empty.
+Publish all modules	Set up Gradle	2026-06-14T19:49:16.4117970Z ##[endgroup]
+Publish all modules	Decode signing key	∩╗┐2026-06-14T19:49:16.5118700Z ##[group]Run echo "***" | base64 --decode > "$RUNNER_TEMP/signing_key.gpg"
+Publish all modules	Decode signing key	2026-06-14T19:49:16.5982400Z ^[[36;1mecho "***" | base64 --decode > "$RUNNER_TEMP/signing_key.gpg"^[[0m
+Publish all modules	Decode signing key	2026-06-14T19:49:16.5983080Z ^[[36;1m# Verify the key decoded correctly^[[0m
+Publish all modules	Decode signing key	2026-06-14T19:49:16.5983460Z ^[[36;1mhead -1 "$RUNNER_TEMP/signing_key.gpg"^[[0m
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6045700Z shell: /bin/bash -e {0}
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6046130Z env:
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6046580Z   JAVA_HOME: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6047350Z   JAVA_HOME_17_ARM64: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6047950Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6048320Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6048700Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6049370Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6050030Z   DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE: gradle-actions
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6050410Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6050720Z ##[endgroup]
+Publish all modules	Decode signing key	2026-06-14T19:49:16.6781560Z -----BEGIN PGP PRIVATE KEY BLOCK-----
+Publish all modules	Publish to Maven Central	∩╗┐2026-06-14T19:49:16.6891790Z ##[group]Run # Read the decoded key into a shell variable (preserves newlines within same run block)
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6892640Z ^[[36;1m# Read the decoded key into a shell variable (preserves newlines within same run block)^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6893240Z ^[[36;1mSIGNING_KEY=$(cat "$RUNNER_TEMP/signing_key.gpg")^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6893790Z ^[[36;1mexport ORG_GRADLE_PROJECT_signingInMemoryKey="$SIGNING_KEY"^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6894190Z ^[[36;1m^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6894470Z ^[[36;1m./gradlew \^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6894850Z ^[[36;1m  publishAllPublicationsToMavenCentralRepository \^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6895220Z ^[[36;1m  --no-daemon \^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6895520Z ^[[36;1m  --no-configuration-cache^[[0m
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6939250Z shell: /bin/bash -e {0}
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6939720Z env:
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6940770Z   JAVA_HOME: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6941780Z   JAVA_HOME_17_ARM64: /Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.19-10/arm64/Contents/Home
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6943310Z   GRADLE_ACTION_ID: gradle/actions/setup-gradle
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6943760Z   GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6965210Z   GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6967040Z   DEVELOCITY_INJECTION_INIT_SCRIPT_NAME: gradle-actions.inject-develocity.init.gradle
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6967650Z   DEVELOCITY_AUTO_INJECTION_CUSTOM_VALUE: gradle-actions
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6968110Z   GITHUB_DEPENDENCY_GRAPH_ENABLED: false
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6969620Z   MAVEN_CENTRAL_USERNAME: ***
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6970070Z   MAVEN_CENTRAL_PASSWORD: ***
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6970390Z   ORG_GRADLE_PROJECT_mavenCentralUsername: ***
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6970830Z   ORG_GRADLE_PROJECT_mavenCentralPassword: ***
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6971820Z   ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: 
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.6972270Z ##[endgroup]
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:16.9314950Z Downloading https://services.gradle.org/distributions/gradle-8.14.3-all.zip
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:24.0966090Z .....................10%.....................20%......................30%.....................40%......................50%.....................60%.....................70%......................80%.....................90%......................100%
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2258220Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2288430Z Welcome to Gradle 8.14.3!
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2291060Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2294040Z Here are the highlights of this release:
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2298060Z  - Java 24 support
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2308690Z  - GraalVM Native Image toolchain selection
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2309480Z  - Enhancements to test reporting
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2317710Z  - Build Authoring improvements
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2318650Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2319510Z For more details see https://docs.gradle.org/8.14.3/release-notes.html
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.2321020Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:35.4137740Z To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Publish all modules	Publish to Maven Central	2026-06-14T19:49:37.1884050Z Daemon will be stopped at the end of the build 
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.5965510Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.6134660Z > Configure project :kmpshortcuts
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.6247340Z w: ΓÜá∩╕Å Deprecated Gradle Property 'kotlin.mpp.androidGradlePluginCompatibility.nowarn' Used
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.6357810Z The `kotlin.mpp.androidGradlePluginCompatibility.nowarn` deprecated property is used in your build.
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.6463270Z Please, stop using it as it is unsupported and may apply no effect to your build.
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.6582900Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:52.6688950Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.6381650Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.6382410Z > Task :kmpshortcuts:androidReleaseEmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.6383050Z > Task :kmpshortcuts-testing:androidReleaseEmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.6845660Z > Task :kmpshortcuts-testing:androidReleaseSourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.6947310Z > Task :kmpshortcuts-testing:preBuild UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.7048420Z > Task :kmpshortcuts-testing:preReleaseBuild UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.7071600Z > Task :kmpshortcuts:androidReleaseSourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.7073430Z > Task :kmpshortcuts:preBuild UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.7075690Z > Task :kmpshortcuts:preReleaseBuild UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8380490Z > Task :kmpshortcuts-testing:mergeReleaseJniLibFolders
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8441940Z > Task :kmpshortcuts:mergeReleaseJniLibFolders
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8442820Z > Task :kmpshortcuts-testing:mergeReleaseNativeLibs NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8444880Z > Task :kmpshortcuts:mergeReleaseNativeLibs NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8445480Z > Task :kmpshortcuts-testing:stripReleaseDebugSymbols NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8446070Z > Task :kmpshortcuts:stripReleaseDebugSymbols NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8446620Z > Task :kmpshortcuts:copyReleaseJniLibsProjectAndLocalJars
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8447210Z > Task :kmpshortcuts-testing:copyReleaseJniLibsProjectAndLocalJars
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8447880Z > Task :kmpshortcuts:generateReleaseResValues
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8456620Z > Task :kmpshortcuts:extractDeepLinksForAarRelease
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8457280Z > Task :kmpshortcuts:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8457960Z > Task :kmpshortcuts-testing:generateReleaseResValues FROM-CACHE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8458580Z > Task :kmpshortcuts-testing:extractDeepLinksForAarRelease FROM-CACHE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8459180Z > Task :kmpshortcuts-testing:checkKotlinGradlePluginConfigurationErrors SKIPPED
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8459860Z > Task :kmpshortcuts-testing:generateReleaseResources
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8460380Z > Task :kmpshortcuts:generateReleaseResources
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:55.8460800Z > Task :kmpshortcuts-testing:packageReleaseResources
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.0590190Z > Task :kmpshortcuts:packageReleaseResources
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2027250Z > Task :kmpshortcuts-testing:mergeReleaseShaders
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2129400Z > Task :kmpshortcuts:mergeReleaseShaders
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2229770Z > Task :kmpshortcuts:compileReleaseShaders NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2332840Z > Task :kmpshortcuts:generateReleaseAssets UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2434190Z > Task :kmpshortcuts:releaseAssetsCopyForAGP NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2539840Z > Task :kmpshortcuts:mergeReleaseAssets
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.2641670Z > Task :kmpshortcuts:javaPreCompileRelease
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3581430Z > Task :kmpshortcuts-testing:parseReleaseLocalResources
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3589640Z > Task :kmpshortcuts:prepareLintJarForPublish
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3590360Z > Task :kmpshortcuts:prepareReleaseArtProfile
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3590820Z > Task :kmpshortcuts:parseReleaseLocalResources
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3591210Z > Task :kmpshortcuts:generateReleaseRFile
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3598230Z > Task :kmpshortcuts-testing:generateReleaseRFile
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3598860Z > Task :kmpshortcuts-testing:compileReleaseShaders NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3599580Z > Task :kmpshortcuts-testing:generateReleaseAssets UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3600330Z > Task :kmpshortcuts-testing:releaseAssetsCopyForAGP NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3600890Z > Task :kmpshortcuts-testing:mergeReleaseAssets
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.3601440Z > Task :kmpshortcuts-testing:javaPreCompileRelease FROM-CACHE
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.9073680Z > Task :kmpshortcuts:processReleaseManifest
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.9074420Z > Task :kmpshortcuts-testing:prepareReleaseArtProfile
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.9075280Z > Task :kmpshortcuts-testing:prepareLintJarForPublish
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.9075830Z > Task :kmpshortcuts-testing:processReleaseManifest
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.9076350Z > Task :kmpshortcuts-testing:writeReleaseAarMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:50:56.9076790Z > Task :kmpshortcuts-testing:createStagingRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:08.0024730Z > Task :kmpshortcuts:writeReleaseAarMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:08.0126640Z > Task :kmpshortcuts:createStagingRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:11.1912260Z > Task :kmpshortcuts:generatePomFileForAndroidReleasePublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:17.0689480Z > Task :kmpshortcuts:compileReleaseKotlinAndroid
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:26.8744850Z > Task :kmpshortcuts-testing:commonizeNativeDistribution
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:41.0845280Z > Task :kmpshortcuts:compileKotlinIosArm64
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:55.3838750Z Downloading native dependencies (LLVM, sysroot etc). This is a one-time action performed only on the first run of the compiler.
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:55.3847100Z Downloading dependency https://download.jetbrains.com/kotlin/native/resources/llvm/16.0.0-aarch64-macos/llvm-16.0.0-aarch64-macos-essentials-65.tar.gz to /Users/runner/.konan/dependencies/cache/llvm-16.0.0-aarch64-macos-essentials-65.tar.gz
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:59.1945310Z Done.
+Publish all modules	Publish to Maven Central	2026-06-14T19:51:59.2047980Z Extracting dependency: /Users/runner/.konan/dependencies/cache/llvm-16.0.0-aarch64-macos-essentials-65.tar.gz into /Users/runner/.konan/dependencies
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:03.9717720Z Downloading dependency https://download.jetbrains.com/kotlin/native/libffi-3.3-1-macos-arm64.tar.gz to /Users/runner/.konan/dependencies/cache/libffi-3.3-1-macos-arm64.tar.gz
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:03.9807940Z Done.
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:03.9909620Z Extracting dependency: /Users/runner/.konan/dependencies/cache/libffi-3.3-1-macos-arm64.tar.gz into /Users/runner/.konan/dependencies
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.2651170Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.2766070Z > Task :kmpshortcuts-testing:metadataCommonMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4359490Z > Task :kmpshortcuts-testing:metadataNativeMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4360410Z > Task :kmpshortcuts-testing:metadataAppleMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4361570Z > Task :kmpshortcuts-testing:metadataIosMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4362160Z > Task :kmpshortcuts-testing:iosArm64SourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4368840Z > Task :kmpshortcuts-testing:iosArm64EmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4369560Z > Task :kmpshortcuts-testing:iosSimulatorArm64SourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4370230Z > Task :kmpshortcuts-testing:iosSimulatorArm64EmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4376950Z > Task :kmpshortcuts-testing:iosX64SourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4377960Z > Task :kmpshortcuts-testing:iosX64EmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4378600Z > Task :kmpshortcuts-testing:jvmProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4379160Z > Task :kmpshortcuts-testing:processJvmMainResources SKIPPED
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4389460Z > Task :kmpshortcuts-testing:jvmSourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4391070Z > Task :kmpshortcuts-testing:jvmEmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4391590Z > Task :kmpshortcuts-testing:buildKotlinToolingMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:19.4392190Z > Task :kmpshortcuts-testing:sourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.0928150Z > Task :kmpshortcuts:extractReleaseAnnotations
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.2245480Z > Task :kmpshortcuts:compileReleaseJavaWithJavac NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.2247250Z > Task :kmpshortcuts:mergeReleaseGeneratedProguardFiles
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.2248800Z > Task :kmpshortcuts:mergeReleaseConsumerProguardFiles
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.2249290Z > Task :kmpshortcuts:processReleaseJavaRes
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.2261510Z > Task :kmpshortcuts:iosArm64Klib
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.2588800Z > Task :kmpshortcuts:commonizeNativeDistribution
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.3492710Z > Task :kmpshortcuts:mergeReleaseJavaResource
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:33.7261210Z > Task :kmpshortcuts-testing:generatePomFileForKotlinMultiplatformPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:34.2543490Z > Task :kmpshortcuts-testing:compileKotlinIosArm64
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:34.3761520Z > Task :kmpshortcuts-testing:iosArm64Klib
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:34.3763860Z > Task :kmpshortcuts-testing:kotlinMultiplatformEmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.6840270Z > Task :kmpshortcuts:transformCommonMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.6941300Z > Task :kmpshortcuts:syncReleaseLibJars
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.7043010Z > Task :kmpshortcuts:bundleReleaseAar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.7145500Z > Task :kmpshortcuts:generateMetadataFileForAndroidReleasePublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.9400720Z > Task :kmpshortcuts:signAndroidReleasePublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.9401350Z > Task :kmpshortcuts:publishAndroidReleasePublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:35.9632390Z > Task :kmpshortcuts:metadataCommonMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.0881500Z > Task :kmpshortcuts:transformNativeMainCInteropDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.0983040Z > Task :kmpshortcuts:transformNativeMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1085300Z > Task :kmpshortcuts:metadataNativeMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1188750Z > Task :kmpshortcuts:transformAppleMainCInteropDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1291560Z > Task :kmpshortcuts:transformAppleMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1392970Z > Task :kmpshortcuts:metadataAppleMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1494160Z > Task :kmpshortcuts:transformIosMainCInteropDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1602540Z > Task :kmpshortcuts:transformIosMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1604050Z > Task :kmpshortcuts:metadataIosMainProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.1703480Z > Task :kmpshortcuts:iosArm64SourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.5863540Z > Task :kmpshortcuts:generatePomFileForIosArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:36.5875320Z > Task :kmpshortcuts:iosArm64EmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:37.4857080Z > Task :kmpshortcuts:compileCommonMainKotlinMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:38.6994690Z > Task :kmpshortcuts:compileKotlinIosSimulatorArm64
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:38.7096760Z > Task :kmpshortcuts:metadataCommonMainClasses
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:38.7197530Z > Task :kmpshortcuts:compileNativeMainKotlinMetadata NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:38.7300870Z > Task :kmpshortcuts:metadataNativeMainClasses UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:38.7402680Z > Task :kmpshortcuts:compileAppleMainKotlinMetadata NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:38.7504560Z > Task :kmpshortcuts:metadataAppleMainClasses UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:39.5019350Z > Task :kmpshortcuts-testing:compileKotlinIosSimulatorArm64
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:39.5156200Z > Task :kmpshortcuts-testing:iosSimulatorArm64Klib
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.0727040Z > Task :kmpshortcuts:compileIosMainKotlinMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.0828490Z > Task :kmpshortcuts:metadataIosMainClasses
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.0928710Z > Task :kmpshortcuts:iosArm64MetadataElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.1029070Z > Task :kmpshortcuts:generateMetadataFileForIosArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.2599710Z > Task :kmpshortcuts:signIosArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.2701060Z > Task :kmpshortcuts:publishIosArm64PublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.2802140Z > Task :kmpshortcuts:iosSimulatorArm64Klib
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.2903620Z > Task :kmpshortcuts:iosSimulatorArm64MetadataElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.3006400Z > Task :kmpshortcuts:iosSimulatorArm64SourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.3025800Z > Task :kmpshortcuts:generateMetadataFileForIosSimulatorArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.4882000Z > Task :kmpshortcuts:generatePomFileForIosSimulatorArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.4882820Z > Task :kmpshortcuts:iosSimulatorArm64EmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.5589140Z > Task :kmpshortcuts:signIosSimulatorArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:40.5590210Z > Task :kmpshortcuts:publishIosSimulatorArm64PublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:41.8975420Z > Task :kmpshortcuts:compileKotlinIosX64
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:41.9079360Z > Task :kmpshortcuts:iosX64Klib
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:41.9180590Z > Task :kmpshortcuts:iosX64MetadataElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:41.9281900Z > Task :kmpshortcuts:iosX64SourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:41.9383290Z > Task :kmpshortcuts:generateMetadataFileForIosX64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.0590400Z > Task :kmpshortcuts-testing:compileKotlinIosX64
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.0591250Z > Task :kmpshortcuts-testing:iosX64Klib
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2204450Z > Task :kmpshortcuts:generatePomFileForIosX64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2346080Z > Task :kmpshortcuts:iosX64EmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2484130Z > Task :kmpshortcuts:signIosX64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2616640Z > Task :kmpshortcuts:publishIosX64PublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2745570Z > Task :kmpshortcuts:jvmProcessResources NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2847770Z > Task :kmpshortcuts:processJvmMainResources SKIPPED
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:42.2948440Z > Task :kmpshortcuts:jvmSourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.0862500Z > Task :kmpshortcuts:compileKotlinJvm
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.2683770Z > Task :kmpshortcuts:generatePomFileForJvmPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.2785430Z > Task :kmpshortcuts:compileJvmMainJava NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.2886750Z > Task :kmpshortcuts:jvmMainClasses
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.3018200Z > Task :kmpshortcuts:jvmJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.3119840Z > Task :kmpshortcuts:generateMetadataFileForJvmPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.3221220Z > Task :kmpshortcuts:jvmEmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.3322490Z > Task :kmpshortcuts:signJvmPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.3323050Z > Task :kmpshortcuts:publishJvmPublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:43.9899720Z > Task :kmpshortcuts:generateProjectStructureMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0001390Z > Task :kmpshortcuts:allMetadataJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0103270Z > Task :kmpshortcuts:buildKotlinToolingMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0204940Z > Task :kmpshortcuts:sourcesJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0306490Z > Task :kmpshortcuts:generateMetadataFileForKotlinMultiplatformPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0408060Z > Task :kmpshortcuts:generatePomFileForKotlinMultiplatformPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0508180Z > Task :kmpshortcuts:kotlinMultiplatformEmptyJavadocJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0582770Z > Task :kmpshortcuts-testing:compileKotlinJvm
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0587040Z > Task :kmpshortcuts:signKotlinMultiplatformPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0589330Z > Task :kmpshortcuts:publishKotlinMultiplatformPublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0602200Z > Task :kmpshortcuts:publishAllPublicationsToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0604930Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForReleaseApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0605750Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForReleaseRuntimeElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0606570Z > Task :kmpshortcuts:bundleLibCompileToJarRelease
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0865840Z > Task :kmpshortcuts:exportCommonSourceSetsMetadataLocationsForMetadataApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.0967780Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForIosArm64ApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.1069170Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForIosSimulatorArm64ApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.1174180Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForIosX64ApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.1191420Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForJvmApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.1192350Z > Task :kmpshortcuts:exportTargetPublicationCoordinatesForJvmRuntimeElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.1193080Z > Task :kmpshortcuts:exportRootPublicationCoordinatesForMetadataApiElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.2360100Z > Task :kmpshortcuts-testing:transformNativeMainCInteropDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:44.7685290Z > Task :kmpshortcuts-testing:compileReleaseKotlinAndroid
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2711450Z > Task :kmpshortcuts-testing:generatePomFileForAndroidReleasePublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2712660Z > Task :kmpshortcuts-testing:extractReleaseAnnotations
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2713340Z > Task :kmpshortcuts-testing:compileReleaseJavaWithJavac NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2713900Z > Task :kmpshortcuts-testing:mergeReleaseGeneratedProguardFiles
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2714540Z > Task :kmpshortcuts-testing:mergeReleaseConsumerProguardFiles
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2715170Z > Task :kmpshortcuts-testing:processReleaseJavaRes
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.2715690Z > Task :kmpshortcuts-testing:mergeReleaseJavaResource
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.4645510Z > Task :kmpshortcuts-testing:transformCommonMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.4747030Z > Task :kmpshortcuts-testing:syncReleaseLibJars
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.4847430Z > Task :kmpshortcuts-testing:bundleReleaseAar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.4950270Z > Task :kmpshortcuts-testing:generateMetadataFileForAndroidReleasePublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.5049790Z > Task :kmpshortcuts-testing:signAndroidReleasePublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.5149950Z > Task :kmpshortcuts-testing:publishAndroidReleasePublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.5700080Z > Task :kmpshortcuts-testing:transformNativeMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.5703500Z > Task :kmpshortcuts-testing:transformAppleMainCInteropDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.5804950Z > Task :kmpshortcuts-testing:transformAppleMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.5906170Z > Task :kmpshortcuts-testing:transformIosMainCInteropDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.6007750Z > Task :kmpshortcuts-testing:transformIosMainDependenciesMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:46.9101340Z > Task :kmpshortcuts-testing:compileCommonMainKotlinMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.0858670Z > Task :kmpshortcuts-testing:generatePomFileForIosArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.0960530Z > Task :kmpshortcuts-testing:metadataCommonMainClasses
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1053290Z > Task :kmpshortcuts-testing:compileNativeMainKotlinMetadata NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1080880Z > Task :kmpshortcuts-testing:metadataNativeMainClasses UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1092280Z > Task :kmpshortcuts-testing:compileAppleMainKotlinMetadata NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1094020Z > Task :kmpshortcuts-testing:metadataAppleMainClasses UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1100710Z > Task :kmpshortcuts-testing:compileIosMainKotlinMetadata NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1132160Z > Task :kmpshortcuts-testing:metadataIosMainClasses UP-TO-DATE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1218070Z > Task :kmpshortcuts-testing:iosArm64MetadataElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1224790Z > Task :kmpshortcuts-testing:generateMetadataFileForIosArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1225560Z > Task :kmpshortcuts-testing:signIosArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1226230Z > Task :kmpshortcuts-testing:publishIosArm64PublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1227250Z > Task :kmpshortcuts-testing:iosSimulatorArm64MetadataElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.1232260Z > Task :kmpshortcuts-testing:generateMetadataFileForIosSimulatorArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.4806610Z > Task :kmpshortcuts-testing:generatePomFileForIosSimulatorArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.4908380Z > Task :kmpshortcuts-testing:signIosSimulatorArm64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.5009840Z > Task :kmpshortcuts-testing:publishIosSimulatorArm64PublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.5119150Z > Task :kmpshortcuts-testing:iosX64MetadataElements
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.5234910Z > Task :kmpshortcuts-testing:generateMetadataFileForIosX64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7051540Z > Task :kmpshortcuts-testing:generatePomFileForIosX64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7052540Z > Task :kmpshortcuts-testing:signIosX64Publication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7053390Z > Task :kmpshortcuts-testing:publishIosX64PublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7054050Z > Task :kmpshortcuts-testing:compileJvmMainJava NO-SOURCE
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7054710Z > Task :kmpshortcuts-testing:jvmMainClasses
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7055360Z > Task :kmpshortcuts-testing:jvmJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:47.7055820Z > Task :kmpshortcuts-testing:generateMetadataFileForJvmPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.2539610Z > Task :kmpshortcuts-testing:generatePomFileForJvmPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.2641870Z > Task :kmpshortcuts-testing:signJvmPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.4876360Z > Task :kmpshortcuts-testing:publishJvmPublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.4893240Z > Task :kmpshortcuts-testing:generateProjectStructureMetadata
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.4914870Z > Task :kmpshortcuts-testing:allMetadataJar
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.4915580Z > Task :kmpshortcuts-testing:generateMetadataFileForKotlinMultiplatformPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.6699950Z > Task :kmpshortcuts-testing:signKotlinMultiplatformPublication
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.6812400Z > Task :kmpshortcuts-testing:publishKotlinMultiplatformPublicationToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:48.6914110Z > Task :kmpshortcuts-testing:publishAllPublicationsToMavenCentralRepository
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.5942540Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6003590Z [Incubating] Problems report is available at: file:///Users/runner/work/kmpshortcuts/kmpshortcuts/build/reports/problems/problems-report.html
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6025800Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6026720Z Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6027370Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6027990Z You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6028710Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6029480Z For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6030360Z 
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6030750Z BUILD SUCCESSFUL in 3m 32s
+Publish all modules	Publish to Maven Central	2026-06-14T19:52:49.6031300Z 177 actionable tasks: 174 executed, 3 from cache
+Publish all modules	Post Set up Gradle	∩╗┐2026-06-14T19:52:50.9615590Z Post job cleanup.
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:51.4140490Z In post-action step
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:51.4145140Z Stopping all Gradle daemons before saving Gradle User Home state
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:51.4145800Z Stopping Gradle daemons for /Users/runner/.gradle/wrapper/dists/gradle-8.14.3-all/10utluxaxniiv4wxiphsi49nj/gradle-8.14.3
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:51.4157220Z [command]/Users/runner/.gradle/wrapper/dists/gradle-8.14.3-all/10utluxaxniiv4wxiphsi49nj/gradle-8.14.3/bin/gradle --stop
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.2014230Z No Gradle daemons are running.
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.2199280Z ##[group]Caching Gradle state
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.2311160Z Caching generated-gradle-jars with path '/Users/runner/.gradle/caches/8.14.3/generated-gradle-jars/gradle-api-8.14.3.jar' and cache key: gradle-generated-gradle-jars-v1-4434c59050703a48bf14168622b59891
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.2389690Z Caching wrapper-zips with path '/Users/runner/.gradle/wrapper/dists/gradle-8.14.3-all/10utluxaxniiv4wxiphsi49nj' and cache key: gradle-wrapper-zips-v1-76a229db5f9d7f6977b9dad3ef7ebc46
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.3024660Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.3026020Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.8291490Z Caching dependencies with path '/Users/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and cache key: gradle-dependencies-v1-fd5ae83581db3e635902c70188b848a5
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9018300Z Caching instrumented-jars with path '/Users/runner/.gradle/caches/jars-*/*/' and cache key: gradle-instrumented-jars-v1-7a153e405b7f3021654048e0c48a9df5
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9053890Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9056670Z Caching kotlin-dsl with path '/Users/runner/.gradle/caches/*/kotlin-dsl/accessors/*/
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9057550Z /Users/runner/.gradle/caches/*/kotlin-dsl/scripts/*/' and cache key: gradle-kotlin-dsl-v1-f1e6d66e593002ff368c7abb973729f9
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9063310Z Caching groovy-dsl with path '/Users/runner/.gradle/caches/*/groovy-dsl/*/' and cache key: gradle-groovy-dsl-v1-e56f2cfc9fd018b61f95b83757172511
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9505160Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:52.9698280Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.0181760Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches/8.14.3/generated-gradle-jars/gradle-api-8.14.3.jar' and key: gradle-generated-gradle-jars-v1-4434c59050703a48bf14168622b59891: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0lQYvagAAAAAxHIvVd/phQq7ipz9jTjNoTEFYMzExMDAwMTA5MDMzAEVkZ2U=
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.0754930Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches/jars-*/*/' and key: gradle-instrumented-jars-v1-7a153e405b7f3021654048e0c48a9df5: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0lQYvagAAAAAFeTNf54CmS75ckJzoeeqdTEFYRURHRTE2MTkARWRnZQ==
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.1738560Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches/*/groovy-dsl/*/' and key: gradle-groovy-dsl-v1-e56f2cfc9fd018b61f95b83757172511: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0lQYvagAAAADD/BuQRvutTobOLalRA1TUTEFYRURHRTE1MDYARWRnZQ==
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.4287510Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.6274670Z Caching transforms with path '/Users/runner/.gradle/caches/transforms-4/*/
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.6379810Z /Users/runner/.gradle/caches/*/transforms/*/' and cache key: gradle-transforms-v1-49736e5a0c2e0b42f98f62f192a8c707
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:53.9846230Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches/*/kotlin-dsl/accessors/*/
+Publish all modules	Post Set up Gradle	/Users/runner/.gradle/caches/*/kotlin-dsl/scripts/*/' and key: gradle-kotlin-dsl-v1-f1e6d66e593002ff368c7abb973729f9: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0lQYvagAAAABDtzKXj8GrSKatH/IwS2/+TEFYMzExMDAwMTA4MDE3AEVkZ2U=
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:54.6567710Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:52:56.0395280Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches/modules-*/files-*/*/*/*/*' and key: gradle-dependencies-v1-fd5ae83581db3e635902c70188b848a5: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0mAYvagAAAAAqmmFBSgisQ4qh6EhmGBPuTEFYRURHRTE4MTgARWRnZQ==
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:07.3707100Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/wrapper/dists/gradle-8.14.3-all/10utluxaxniiv4wxiphsi49nj' and key: gradle-wrapper-zips-v1-76a229db5f9d7f6977b9dad3ef7ebc46: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0owYvagAAAABMEzzorAUdQZ3y4tGa/HjRTEFYRURHRTE1MTEARWRnZQ==
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:15.3587100Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches/transforms-4/*/
+Publish all modules	Post Set up Gradle	/Users/runner/.gradle/caches/*/transforms/*/' and key: gradle-transforms-v1-49736e5a0c2e0b42f98f62f192a8c707: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0qwYvagAAAAC2tXcWbXRVSoIZk8VwOMOHTEFYMzExMDAwMTE1MDIxAEVkZ2U=
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:19.0205130Z Caching Gradle User Home with cache key: gradle-home-v1|macOS|publish[1f937033cd26dccd30ed77bb723adde9]-781b26de59035d8976c105dd00f3c5b48f699566
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:19.0333940Z [command]/opt/homebrew/bin/gtar --posix -cf cache.tzst --exclude cache.tzst -P -C /Users/runner/work/kmpshortcuts/kmpshortcuts --files-from manifest.txt --delay-directory-restore --use-compress-program zstdmt
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:19.2905300Z ##[warning]Failed to save cache entry with path '/Users/runner/.gradle/caches,/Users/runner/.gradle/notifications,/Users/runner/.gradle/.setup-gradle' and key: gradle-home-v1|macOS|publish[1f937033cd26dccd30ed77bb723adde9]-781b26de59035d8976c105dd00f3c5b48f699566: Error: <h2>Our services aren't available right now</h2><p>We're working to restore all services as soon as possible. Please check back soon.</p>0rwYvagAAAAB5REz+BItzRqpxa4aABN5BTEFYRURHRTIwMTMARWRnZQ==
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:19.2908830Z ##[endgroup]
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:19.2909680Z Generating Job Summary
+Publish all modules	Post Set up Gradle	2026-06-14T19:53:19.2922710Z Completed post-action step
+Publish all modules	Post Set up JDK 17	∩╗┐2026-06-14T19:53:19.3111560Z Post job cleanup.
+Publish all modules	Post Checkout	∩╗┐2026-06-14T19:53:19.4907470Z Post job cleanup.
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6093550Z [command]/opt/homebrew/bin/git version
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6376910Z git version 2.54.0
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6400290Z Copying '/Users/runner/.gitconfig' to '/Users/runner/work/_temp/df0d1840-84f9-4e82-9b06-0c6e478fa37d/.gitconfig'
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6410270Z Temporarily overriding HOME='/Users/runner/work/_temp/df0d1840-84f9-4e82-9b06-0c6e478fa37d' before making global git config changes
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6411060Z Adding repository directory to the temporary git global config as a safe directory
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6420420Z [command]/opt/homebrew/bin/git config --global --add safe.directory /Users/runner/work/kmpshortcuts/kmpshortcuts
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6551200Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp core\.sshCommand
+Publish all modules	Post Checkout	2026-06-14T19:53:19.6623300Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Publish all modules	Post Checkout	2026-06-14T19:53:19.7659160Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Publish all modules	Post Checkout	2026-06-14T19:53:19.7715680Z http.https://github.com/.extraheader
+Publish all modules	Post Checkout	2026-06-14T19:53:19.7724370Z [command]/opt/homebrew/bin/git config --local --unset-all http.https://github.com/.extraheader
+Publish all modules	Post Checkout	2026-06-14T19:53:19.7792890Z [command]/opt/homebrew/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Publish all modules	Post Checkout	2026-06-14T19:53:19.8596140Z [command]/opt/homebrew/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Publish all modules	Post Checkout	2026-06-14T19:53:19.8651380Z [command]/opt/homebrew/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Publish all modules	Complete job	∩╗┐2026-06-14T19:53:20.0572010Z Cleaning up orphan processes
+Publish all modules	Complete job	2026-06-14T19:53:21.7076120Z ##[warning]Node.js 20 actions are deprecated. The following actions are running on Node.js 20 and may not work as expected: actions/checkout@v4, actions/setup-java@v4, gradle/actions/setup-gradle@v3. Actions will be forced to run with Node.js 24 by default starting June 16th, 2026. Node.js 20 will be removed from the runner on September 16th, 2026. Please check if updated versions of these actions are available that support Node.js 24. To opt into Node.js 24 now, set the FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true environment variable on the runner or in your workflow file. Once Node.js 24 becomes the default, you can temporarily opt out by setting ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
