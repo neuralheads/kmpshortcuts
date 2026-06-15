@@ -57,7 +57,7 @@ class IOSShortcutBadge : ShortcutBadge {
 
         val center = UNUserNotificationCenter.currentNotificationCenter()
         val content = UNMutableNotificationContent().apply {
-            setBadge(NSNumber.numberWithInt(safeCount))
+            setBadge(NSNumber(int = safeCount))
         }
         val request = UNNotificationRequest.requestWithIdentifier(
             identifier = NOTIFICATION_ID,
