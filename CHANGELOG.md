@@ -7,7 +7,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.0-beta01] — 2026-06-15
+
+### Added
+- **`shortcut { }` DSL builder** — `shortcut("id") { shortLabel = "…"; icon = … }` and
+  `shortcuts { shortcut(…) { … } }` list builder. Annotated with `@DslMarker` to prevent accidental
+  nesting. Both functions are top-level in the `io.neuralheads.kmpshortcuts` package.
+- **`ShortcutStore`** — reactive write-through cache exposing `shortcuts: StateFlow<List<ShortcutInfo>>`.
+  Updates whenever any mutation (`set`, `add`, `update`, `remove`, `clear`) is called.
+  Includes optional `ShortcutStore.Persister` interface so apps can save/restore the list across
+  cold launches without adding a dependency to the core library.
+- **`ShortcutBadge`** — unified app icon badge count API (`setBadgeCount`, `clearBadge`,
+  `requestPermission`, `getBadgeCount`, `isBadgeSupported`).
+  - `AndroidShortcutBadge` — uses a silent `NotificationChannel` (IMPORTANCE_MIN) for broad
+    launcher compatibility (Samsung One UI, Nova, etc.).
+  - `IOSShortcutBadge` — uses `UNUserNotificationCenter` (iOS 16+ recommended API).
+  - Accessible via `KMPShortcuts.badge` after initialization.
+- **`observeShortcuts(): StateFlow<List<ShortcutInfo>>`** — added to `AppShortcutManager` interface.
+  All three implementations (`AndroidShortcutManager`, `IOSShortcutManager`,
+  `FakeAppShortcutManager`) emit on every mutation.
+- **Conversation shortcuts** — `ShortcutInfo` now has optional `categories: Set<ShortcutCategory>`
+  and `person: ShortcutPerson?` fields.
+  - `ShortcutCategory.CONVERSATION` / `MEDIA` — map to Android system category strings;
+    conversation shortcuts appear in the Android share sheet and notification shade. No-op on iOS.
+  - `ShortcutPerson(name, key, uri, isBot)` — mapped to `androidx.core.app.Person` on Android
+    for full conversation ranking integration. No-op on iOS.
+- **Extension functions** on `AppShortcutManager`:
+  - `setShortcuts(vararg shortcuts)` — vararg overload
+  - `setShortcuts { shortcut(…) { … } }` — DSL overload
+  - `addOrUpdate(shortcut)` — insert or update by ID
+  - `removeShortcuts(vararg ids)` — batch removal
+  - `isAtCapacity()` — returns `true` when at platform limit
+- **`KMPShortcuts.resetForTesting()`** — resets singleton to uninitialized state for clean
+  test isolation. Call from `@AfterTest`.
+- **`KMPShortcuts.initialize(manager, badge)`** — optional `badge` parameter to register
+  the `ShortcutBadge` implementation at startup.
+- **60+ SF Symbol → Material icon mappings** (up from 35):
+  Added `person.2`, `lock`, `key`, `doc`, `folder`, `wifi`, `battery.100`, `clock`, `calendar`,
+  `music.note`, `play`, `pause`, `stop`, `mic`, `video`, `lightbulb`, `tag`, `flag`, `paperplane`,
+  `square.and.arrow.up`, `qrcode`, `chart.bar`, `square.stack`, `sun.max`, `moon`, `pencil`, and more.
+  Plus 25 new bundled Android drawable XML files.
+- **`MaterialSymbolMapper.registerCustomMapping(sfSymbol, drawableName)`** — public API to register
+  app-specific SF Symbol → drawable mappings at runtime. Custom entries take precedence over built-ins.
+- **`MaterialSymbolMapper`** is now `public` (was `internal`).
+- **`FakeAppShortcutManager` improvements**:
+  - `reset()` — clears `shortcuts`, `reportedUsage`, `pinRequests` and resets the StateFlow
+  - `simulateActivation(event: ShortcutActivationEvent)` — full-event overload of `simulateTap`
+  - `simulatePinSupported: Boolean` — set to `false` to simulate unsupported launchers
+  - `maxShortcutCount` is now mutable (`var`) so tests can change it mid-run
+  - Implements the new `observeShortcuts()` StateFlow
+
+### Changed
+- `updateShortcut` lambda parameter renamed from `update` to `transform` for clarity (source compatible).
+- `ShortcutInfo` gains two new optional fields (`categories`, `person`) — binary compatible
+  (default values supplied).
+- `KMPShortcuts.initialize()` now accepts an optional `badge` parameter — source compatible.
+
+---
+
 ## [0.1.0-alpha04] — 2026-06-14
+
 
 - Migrated Kotlin package names from `com.neuralheads.kmpshortcuts` to `io.neuralheads.kmpshortcuts`, but kept the published Maven Group ID as `com.neuralheads` for Sonatype Central validation compatibility.
 - Lowered Android `minSdk` to 23 (was 25).

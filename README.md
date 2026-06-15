@@ -15,10 +15,15 @@ Wraps **`ShortcutManagerCompat`** (Android) and **`UIApplicationShortcutItem`** 
 
 - 🔗 **Unified API** — one `AppShortcutManager` interface, both platforms
 - ⚡ **Coroutine-native** — all mutations are `suspend`; tap events delivered via a hot `Flow`
-- 🎨 **Cross-platform icons** — SF Symbols → Material mapping, asset catalog images, raw bitmaps
+- 🛠 **DSL builder** — `shortcut("id") { shortLabel = "…"; deepLink = "…" }` for clean setup
+- 🔴 **`ShortcutBadge`** — unified app icon badge count API (Android + iOS)
+- 📡 **Reactive** — `observeShortcuts()` `StateFlow` emits on every change; use with `ShortcutStore`
+- 💬 **Conversation shortcuts** — `ShortcutPerson` + `ShortcutCategory` for Android share sheet integration
+- 🎨 **Cross-platform icons** — 60+ SF Symbols → Material mapping, asset catalog images, raw bitmaps
+- 🔧 **Extensible icons** — `MaterialSymbolMapper.registerCustomMapping()` for your own SF Symbol → drawable pairs
 - 📌 **Pinned shortcut support** — request pinning on Android; graceful no-op on iOS
 - 🔄 **Usage reporting** — `reportUsed()` boosts ranking on Android; re-orders in-memory on iOS
-- 🧪 **Test-ready** — `FakeAppShortcutManager` for unit tests with zero platform dependencies
+- 🧪 **Test-ready** — `FakeAppShortcutManager` with `reset()`, `simulateActivation()`, and `observeShortcuts()`
 - 📦 **Minimal footprint** — depends only on `kotlinx-coroutines-core` and `androidx-core-ktx`
 
 ---
@@ -31,12 +36,12 @@ Add to your shared module's `build.gradle.kts`:
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("com.neuralheads:kmpshortcuts:0.1.0-alpha04")
+            implementation("com.neuralheads:kmpshortcuts:0.1.0-beta01")
         }
 
         // Test double — zero platform dependencies
         commonTest.dependencies {
-            implementation("com.neuralheads:kmpshortcuts-testing:0.1.0-alpha04")
+            implementation("com.neuralheads:kmpshortcuts-testing:0.1.0-beta01")
         }
     }
 }
@@ -46,7 +51,7 @@ And to your `androidApp` module's `build.gradle.kts` (required for `AndroidShort
 
 ```kotlin
 dependencies {
-    implementation("com.neuralheads:kmpshortcuts:0.1.0-alpha04")
+    implementation("com.neuralheads:kmpshortcuts:0.1.0-beta01")
 }
 ```
 
@@ -62,7 +67,10 @@ dependencies {
 class MyApp : Application() {
     override fun onCreate() {
         super.onCreate()
-        KMPShortcuts.initialize(AndroidShortcutManager(context = this))
+        KMPShortcuts.initialize(
+            manager = AndroidShortcutManager(this),
+            badge   = AndroidShortcutBadge(this)   // optional — for badge support
+        )
     }
 }
 ```
@@ -78,35 +86,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        KMPShortcuts.shared.initialize(manager: IOSShortcutManager())
+        KMPShortcuts.shared.initialize(
+            manager: IOSShortcutManager(),
+            badge:   IOSShortcutBadge()   // optional
+        )
         return true
     }
 }
 ```
 
-### 2. Set shortcuts (shared Kotlin code)
+### 2. Set shortcuts — DSL style (recommended)
 
 ```kotlin
 suspend fun setupShortcuts() {
-    KMPShortcuts.manager.setShortcuts(listOf(
-        ShortcutInfo(
-            id             = "new_post",
-            shortLabel     = "New Post",
-            longLabel      = "Create a new post",
-            icon           = ShortcutIcon.System("square.and.pencil"),
-            deepLinkAction = "myapp://new-post"
-        ),
-        ShortcutInfo(
-            id             = "search",
-            shortLabel     = "Search",
-            icon           = ShortcutIcon.System("magnifyingglass"),
-            deepLinkAction = "myapp://search"
-        )
-    ))
+    KMPShortcuts.manager.setShortcuts {
+        shortcut("new_post") {
+            shortLabel = "New Post"
+            longLabel  = "Create a new post"
+            icon       = ShortcutIcon.System("square.and.pencil")
+            deepLink   = "myapp://new-post"
+        }
+        shortcut("search") {
+            shortLabel = "Search"
+            icon       = ShortcutIcon.System("magnifyingglass")
+            deepLink   = "myapp://search"
+        }
+        shortcut("inbox") {
+            shortLabel = "Inbox"
+            icon       = ShortcutIcon.System("envelope")
+            deepLink   = "myapp://inbox"
+        }
+    }
 }
 ```
 
-### 3. Observe activations (shared Kotlin code)
+### 3. Observe shortcut list reactively
+
+```kotlin
+// In a ViewModel:
+val shortcuts = KMPShortcuts.manager.observeShortcuts()
+    .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+```
+
+### 4. Observe activations (shared Kotlin code)
 
 ```kotlin
 fun observeShortcuts(scope: CoroutineScope) {
@@ -179,29 +201,80 @@ func application(
 | Method / Property | Description |
 |-------------------|-------------|
 | `setShortcuts(shortcuts)` | Replace **all** dynamic shortcuts. List is trimmed to the platform limit automatically. |
+| `setShortcuts { shortcut(…) }` | DSL overload — build the list inline. |
 | `addShortcut(shortcut)` | Add or update a single shortcut. Pushes the oldest out when at the platform limit. |
-| `updateShortcut(id, block)` | Mutate an existing shortcut in-place via a copy lambda. No-op if `id` not found. |
+| `addOrUpdate(shortcut)` | Add if new, update if ID exists. |
+| `updateShortcut(id, transform)` | Mutate an existing shortcut in-place via a `copy` lambda. No-op if `id` not found. |
 | `removeShortcut(id)` | Remove a shortcut by ID. Silent no-op for unknown IDs. |
+| `removeShortcuts(vararg ids)` | Remove multiple shortcuts by ID in one call. |
 | `clearShortcuts()` | Remove all dynamic shortcuts. |
 | `getShortcuts()` | Return all current dynamic shortcuts, including `extras`. |
 | `reportUsed(shortcutId)` | Report usage — boosts ranking on Android; moves to top on iOS. |
 | `requestPin(shortcut)` | Request home-screen pinning (Android only). Returns `false` on iOS. |
 | `isPinSupported()` | `true` on Android launchers that support pinning, always `false` on iOS. |
+| `isAtCapacity()` | `true` when the platform limit has been reached. |
 | `observeActivations()` | Hot `Flow<ShortcutActivationEvent>` — collect to respond to shortcut taps. |
+| `observeShortcuts()` | `StateFlow<List<ShortcutInfo>>` — emits on every mutation. |
 | `maxShortcutCount` | Platform dynamic shortcut limit (Android: up to 5; iOS: 4). |
 
 ### `ShortcutInfo`
 
 ```kotlin
 data class ShortcutInfo(
-    val id: String,                          // Stable identifier — must be unique
-    val shortLabel: String,                  // ~12 chars — shown on iOS and space-constrained Android
-    val longLabel: String = shortLabel,      // ~25 chars — shown on Android when space allows
+    val id: String,                               // Stable identifier — must be unique
+    val shortLabel: String,                       // ~12 chars — shown on iOS and space-constrained Android
+    val longLabel: String = shortLabel,           // ~25 chars — shown on Android when space allows
     val icon: ShortcutIcon = ShortcutIcon.None,
-    val deepLinkAction: String? = null,      // URI, e.g. "myapp://feed"
+    val deepLinkAction: String? = null,           // URI, e.g. "myapp://feed"
     val extras: Map<String, String> = emptyMap(), // Delivered in ShortcutActivationEvent.extras
-    val rank: Int = 0                        // Lower = higher position (Android only)
+    val rank: Int = 0,                            // Lower = higher position (Android only)
+    val categories: Set<ShortcutCategory> = emptySet(), // Android: share-sheet / conversation ranking
+    val person: ShortcutPerson? = null            // Android: conversation shortcut person
 )
+```
+
+### `ShortcutBadge`
+
+Set the app icon badge number from shared code:
+
+```kotlin
+// At startup:
+val granted = KMPShortcuts.badge.requestPermission()  // iOS only — Android always returns true
+
+// Show badge:
+KMPShortcuts.badge.setBadgeCount(5)
+
+// Clear:
+KMPShortcuts.badge.clearBadge()
+```
+
+### `ShortcutStore` — Reactive Cache
+
+```kotlin
+val store = ShortcutStore.create(
+    manager = KMPShortcuts.manager,
+    initialShortcuts = savedList  // restored from disk on cold launch
+)
+
+// ViewModel — react to changes:
+val shortcuts = store.shortcuts  // StateFlow<List<ShortcutInfo>>
+
+// Mutate:
+store.set {
+    shortcut("new_post") { shortLabel = "New Post" }
+}
+```
+
+### Conversation Shortcuts (Android)
+
+```kotlin
+shortcut("chat_alice") {
+    shortLabel = "Alice"
+    icon       = ShortcutIcon.Resource("avatar_alice")
+    categories = setOf(ShortcutCategory.CONVERSATION)
+    person     = ShortcutPerson(name = "Alice", key = "user_42")
+    deepLink   = "myapp://chat/42"
+}
 ```
 
 ### `ShortcutIcon`

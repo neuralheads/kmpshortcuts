@@ -8,39 +8,53 @@ import kotlin.concurrent.Volatile
  * Call [initialize] once during app startup, then access [manager] from
  * anywhere in shared code.
  *
- * ## Android
+ * ## Android — `Application.onCreate()`
  * ```kotlin
- * // Application.onCreate()
- * KMPShortcuts.initialize(AndroidShortcutManager(context = this))
+ * class MyApp : Application() {
+ *     override fun onCreate() {
+ *         super.onCreate()
+ *         KMPShortcuts.initialize(
+ *             manager = AndroidShortcutManager(this),
+ *             badge   = AndroidShortcutBadge(this)
+ *         )
+ *     }
+ * }
  * ```
  *
- * ## iOS (from AppDelegate via Kotlin)
+ * ## iOS — `AppDelegate.application(_:didFinishLaunchingWithOptions:)`
  * ```kotlin
- * KMPShortcuts.initialize(IOSShortcutManager())
+ * KMPShortcuts.initialize(
+ *     manager = IOSShortcutManager(),
+ *     badge   = IOSShortcutBadge()
+ * )
  * ```
  */
 object KMPShortcuts {
 
     /**
-     * Backing field declared `@Volatile` (`kotlin.concurrent.Volatile`) so that a
-     * write from the main thread (Application.onCreate / AppDelegate) is immediately
-     * visible to any background thread that subsequently reads [manager].
-     *
-     * `kotlin.concurrent.Volatile` is the KMP-safe equivalent of `@kotlin.jvm.Volatile`
-     * and is available on all targets since Kotlin 1.8.20.
+     * `@Volatile` so a write from the main thread is immediately visible to any
+     * background thread that subsequently reads [manager].
      */
     @Volatile
     private var _manager: AppShortcutManager? = null
 
+    @Volatile
+    private var _badge: ShortcutBadge? = null
+
     /**
-     * Register the platform [AppShortcutManager] implementation.
-     * Must be called exactly once, before any access to [manager].
+     * Register the platform implementations.
+     * Must be called exactly once before any access to [manager] or [badge].
      *
-     * Re-initializing with a different implementation is allowed (e.g. in tests)
-     * but is not recommended in production code.
+     * Re-initializing is allowed in tests — call [resetForTesting] between test cases
+     * for clean isolation.
+     *
+     * @param manager Platform [AppShortcutManager] implementation.
+     * @param badge   Optional [ShortcutBadge] implementation. If omitted, [badge] will
+     *                throw [IllegalStateException] until supplied.
      */
-    fun initialize(manager: AppShortcutManager) {
+    fun initialize(manager: AppShortcutManager, badge: ShortcutBadge? = null) {
         _manager = manager
+        _badge   = badge
     }
 
     /**
@@ -54,6 +68,38 @@ object KMPShortcuts {
                 "Call it from Application.onCreate() (Android) or AppDelegate (iOS)."
             )
 
+    /**
+     * The registered [ShortcutBadge] implementation.
+     *
+     * @throws IllegalStateException if [initialize] has not been called, or if
+     *         [initialize] was called without supplying a [badge] parameter.
+     */
+    val badge: ShortcutBadge
+        get() = _badge
+            ?: error(
+                "No ShortcutBadge implementation registered. " +
+                "Pass badge = AndroidShortcutBadge(context) / IOSShortcutBadge() " +
+                "to KMPShortcuts.initialize()."
+            )
+
     /** Returns `true` if [initialize] has been called. */
     val isInitialized: Boolean get() = _manager != null
+
+    /**
+     * Reset the singleton to its uninitialized state.
+     *
+     * **For use in unit tests ONLY.** Call this in `@AfterTest` / `@After` to ensure
+     * clean state between test cases.
+     *
+     * ```kotlin
+     * @AfterTest
+     * fun tearDown() {
+     *     KMPShortcuts.resetForTesting()
+     * }
+     * ```
+     */
+    fun resetForTesting() {
+        _manager = null
+        _badge   = null
+    }
 }

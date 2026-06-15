@@ -1,6 +1,7 @@
 package io.neuralheads.kmpshortcuts
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 /**
  * Platform-agnostic interface for managing Home Screen / Launcher app shortcuts.
@@ -36,8 +37,18 @@ interface AppShortcutManager {
      */
     suspend fun addShortcut(shortcut: ShortcutInfo)
 
-    /** Update an existing shortcut by [id]. No-op if [id] is not found. */
-    suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo)
+    /**
+     * Update an existing shortcut by [id]. No-op if [id] is not found.
+     *
+     * Use [copy] inside the lambda:
+     * ```kotlin
+     * manager.updateShortcut("my_id") { copy(shortLabel = "Updated") }
+     * ```
+     *
+     * @param id The [ShortcutInfo.id] of the shortcut to mutate.
+     * @param transform Lambda with [ShortcutInfo] as receiver. Must return the modified copy.
+     */
+    suspend fun updateShortcut(id: String, transform: ShortcutInfo.() -> ShortcutInfo)
 
     /** Remove shortcut by [id]. Silently ignores unknown IDs. */
     suspend fun removeShortcut(id: String)
@@ -70,12 +81,26 @@ interface AppShortcutManager {
      * taps a shortcut and activates the app.
      *
      * - Android: feed via [AndroidShortcutManager.handleIntent] from `Activity.onCreate` / `onNewIntent`.
-     * - iOS:     feed by calling `IOSShortcutManager.handleShortcutItem()`
-     *            from AppDelegate.
+     * - iOS:     feed by calling `IOSShortcutManager.handleShortcutItem()` from AppDelegate.
      *
      * The flow uses `replay = 0` and `DROP_OLDEST` overflow so it never throws.
      */
     fun observeActivations(): Flow<ShortcutActivationEvent>
+
+    /**
+     * A [StateFlow] that emits the current list of shortcuts whenever it changes.
+     *
+     * Emits immediately on first collection with the current snapshot, then re-emits
+     * after every [setShortcuts], [addShortcut], [updateShortcut], [removeShortcut],
+     * or [clearShortcuts] call.
+     *
+     * ## Usage in a ViewModel
+     * ```kotlin
+     * val shortcuts = manager.observeShortcuts()
+     *     .stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+     * ```
+     */
+    fun observeShortcuts(): StateFlow<List<ShortcutInfo>>
 
     /** Maximum number of dynamic shortcuts this platform allows. */
     val maxShortcutCount: Int

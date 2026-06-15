@@ -4,12 +4,16 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
+import androidx.core.app.Person
 import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
@@ -46,6 +50,7 @@ class AndroidShortcutManager(
 ) : AppShortcutManager {
 
     private val mutex = Mutex()
+    private val _shortcutsFlow = MutableStateFlow<List<ShortcutInfo>>(emptyList())
 
     override val maxShortcutCount: Int
         get() = ShortcutManagerCompat.getMaxShortcutCountPerActivity(context)
@@ -64,6 +69,7 @@ class AndroidShortcutManager(
                     context,
                     trimmed.map { it.toShortcutInfoCompat(context) }
                 )
+                _shortcutsFlow.value = trimmed
             }
         }
 
@@ -74,28 +80,29 @@ class AndroidShortcutManager(
                     context,
                     shortcut.toShortcutInfoCompat(context)
                 )
+                // Re-read from platform to stay in sync with push-eviction semantics
+                _shortcutsFlow.value = ShortcutManagerCompat.getDynamicShortcuts(context)
+                    .map { it.toShortcutInfoKMP() }
             }
         }
 
-    override suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo): Unit {
-        // getDynamicShortcuts() may return android.content.pm.ShortcutInfo (platform type)
-        // depending on the AndroidX / compileSdk combination, so we use the overloaded
-        // toShortcutInfo() that handles both ShortcutInfoCompat and the platform type.
+    override suspend fun updateShortcut(id: String, transform: ShortcutInfo.() -> ShortcutInfo): Unit {
         val existing = withContext(Dispatchers.Main) {
             mutex.withLock {
                 ShortcutManagerCompat.getDynamicShortcuts(context).firstOrNull { it.id == id }
             }
         } ?: return
-        // Convert to our ShortcutInfo then apply the lambda without a with() receiver
-        // ambiguity — the extension type variable avoids the Kotlin compiler error.
         val base: ShortcutInfo = existing.toShortcutInfoKMP()
-        val updated: ShortcutInfo = update(base)
+        val updated: ShortcutInfo = transform(base)
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 ShortcutManagerCompat.updateShortcuts(
                     context,
                     listOf(updated.toShortcutInfoCompat(context))
                 )
+                val current = _shortcutsFlow.value.toMutableList()
+                val idx = current.indexOfFirst { it.id == id }
+                if (idx >= 0) { current[idx] = updated; _shortcutsFlow.value = current }
             }
         }
     }
@@ -104,6 +111,7 @@ class AndroidShortcutManager(
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 ShortcutManagerCompat.removeDynamicShortcuts(context, listOf(id))
+                _shortcutsFlow.value = _shortcutsFlow.value.filter { it.id != id }
             }
         }
 
@@ -111,6 +119,7 @@ class AndroidShortcutManager(
         withContext(Dispatchers.Main) {
             mutex.withLock {
                 ShortcutManagerCompat.removeAllDynamicShortcuts(context)
+                _shortcutsFlow.value = emptyList()
             }
         }
 
@@ -150,6 +159,9 @@ class AndroidShortcutManager(
 
     override fun observeActivations(): Flow<ShortcutActivationEvent> =
         _activationFlow.asSharedFlow()
+
+    override fun observeShortcuts(): StateFlow<List<ShortcutInfo>> =
+        _shortcutsFlow.asStateFlow()
 
     // ── Companion ──────────────────────────────────────────────────────────────
 
@@ -216,8 +228,23 @@ private fun ShortcutInfo.toShortcutInfoCompat(context: Context): ShortcutInfoCom
 
     ShortcutIconResolver.resolve(icon, context)?.let { builder.setIcon(it) }
 
+    // Conversation shortcuts — map ShortcutPerson → androidx.core.app.Person
+    if (person != null) {
+        val personBuilder = Person.Builder().setName(person.name)
+        person.key?.let { personBuilder.setKey(it) }
+        person.uri?.let  { personBuilder.setUri(it) }
+        personBuilder.setBot(person.isBot)
+        builder.setPerson(personBuilder.build())
+    }
+
+    // Map ShortcutCategory → platform string set
+    if (categories.isNotEmpty()) {
+        builder.setCategories(categories.map { it.androidValue }.toSet())
+    }
+
     return builder.build()
 }
+
 
 /**
  * Maps any shortcut object back to a [ShortcutInfo].

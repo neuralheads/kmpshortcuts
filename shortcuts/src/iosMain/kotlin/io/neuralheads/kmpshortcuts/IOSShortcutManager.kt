@@ -4,7 +4,10 @@ package io.neuralheads.kmpshortcuts
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import platform.UIKit.UIApplicationShortcutItem
@@ -49,29 +52,43 @@ class IOSShortcutManager : AppShortcutManager {
 
     private val mutex = Mutex()
     private var _cache: List<ShortcutInfo> = emptyList()
+    private val _shortcutsFlow = MutableStateFlow<List<ShortcutInfo>>(emptyList())
 
     override val maxShortcutCount: Int = 4
 
     // ── Mutations ──────────────────────────────────────────────────────────────
 
     override suspend fun setShortcuts(shortcuts: List<ShortcutInfo>): Unit =
-        mutex.withLock { _cache = shortcuts.take(maxShortcutCount) }
+        mutex.withLock {
+            _cache = shortcuts.take(maxShortcutCount)
+            _shortcutsFlow.value = _cache
+        }
 
     override suspend fun addShortcut(shortcut: ShortcutInfo): Unit =
-        mutex.withLock { _cache = (_cache + shortcut).take(maxShortcutCount) }
+        mutex.withLock {
+            _cache = (_cache + shortcut).take(maxShortcutCount)
+            _shortcutsFlow.value = _cache
+        }
 
-    override suspend fun updateShortcut(id: String, update: ShortcutInfo.() -> ShortcutInfo): Unit =
+    override suspend fun updateShortcut(id: String, transform: ShortcutInfo.() -> ShortcutInfo): Unit =
         mutex.withLock {
             val idx = _cache.indexOfFirst { it.id == id }
             if (idx < 0) return@withLock
-            _cache = _cache.toMutableList().also { it[idx] = it[idx].update() }
+            _cache = _cache.toMutableList().also { it[idx] = it[idx].transform() }
+            _shortcutsFlow.value = _cache
         }
 
     override suspend fun removeShortcut(id: String): Unit =
-        mutex.withLock { _cache = _cache.filter { it.id != id } }
+        mutex.withLock {
+            _cache = _cache.filter { it.id != id }
+            _shortcutsFlow.value = _cache
+        }
 
     override suspend fun clearShortcuts(): Unit =
-        mutex.withLock { _cache = emptyList() }
+        mutex.withLock {
+            _cache = emptyList()
+            _shortcutsFlow.value = _cache
+        }
 
     override suspend fun getShortcuts(): List<ShortcutInfo> =
         mutex.withLock { _cache.toList() }
@@ -94,6 +111,9 @@ class IOSShortcutManager : AppShortcutManager {
 
     override fun observeActivations(): Flow<ShortcutActivationEvent> =
         _activationFlow.asSharedFlow()
+
+    override fun observeShortcuts(): StateFlow<List<ShortcutInfo>> =
+        _shortcutsFlow.asStateFlow()
 
     // ── Swift bridge ───────────────────────────────────────────────────────────
 
