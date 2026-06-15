@@ -12,10 +12,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import io.neuralheads.kmpshortcuts.KMPShortcuts
-import io.neuralheads.kmpshortcuts.AndroidShortcutManager
-import io.neuralheads.kmpshortcuts.ShortcutInfo
-import io.neuralheads.kmpshortcuts.ShortcutIcon
+import io.neuralheads.kmpshortcuts.*
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -27,6 +24,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addCustomBtn: Button
     private lateinit var removeBtn: Button
     private lateinit var pinBtn: Button
+    private lateinit var incrementBadgeBtn: Button
+    private lateinit var clearBadgeBtn: Button
 
     private val logBuilder = SpannableStringBuilder()
 
@@ -63,18 +62,36 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        updateShortcutsDisplay()
+        // Start collecting/observing registered shortcuts reactively (observeShortcuts StateFlow)
+        lifecycleScope.launch {
+            KMPShortcuts.manager.observeShortcuts().collect { list ->
+                statusView.text = "Registered Dynamic Shortcuts: ${list.size} / ${KMPShortcuts.manager.maxShortcutCount}\nPinning supported: ${KMPShortcuts.manager.isPinSupported()}"
+                log("Current shortcuts updated reactively: " + list.map { it.id }.toString(), COLOR_INFO)
+            }
+        }
 
         setDefaultBtn.setOnClickListener {
             lifecycleScope.launch {
                 try {
-                    KMPShortcuts.manager.setShortcuts(listOf(
-                        ShortcutInfo(id = "new_task", shortLabel = "New Task", icon = ShortcutIcon.System("plus"), deepLinkAction = "kmpshortcuts://new-task"),
-                        ShortcutInfo(id = "run_tests", shortLabel = "Run Tests", icon = ShortcutIcon.System("checkmark"), deepLinkAction = "kmpshortcuts://run-tests"),
-                        ShortcutInfo(id = "settings", shortLabel = "Settings", icon = ShortcutIcon.System("gear"), deepLinkAction = "kmpshortcuts://settings")
-                    ))
-                    log("Successfully set default shortcuts!", COLOR_SUCCESS)
-                    updateShortcutsDisplay()
+                    // Use the DSL builder overload to set shortcuts
+                    KMPShortcuts.manager.setShortcuts {
+                        shortcut("new_task") {
+                            shortLabel = "New Task"
+                            icon = ShortcutIcon.System("plus")
+                            deepLink = "kmpshortcuts://new-task"
+                        }
+                        shortcut("run_tests") {
+                            shortLabel = "Run Tests"
+                            icon = ShortcutIcon.System("checkmark")
+                            deepLink = "kmpshortcuts://run-tests"
+                        }
+                        shortcut("settings") {
+                            shortLabel = "Settings"
+                            icon = ShortcutIcon.System("gear")
+                            deepLink = "kmpshortcuts://settings"
+                        }
+                    }
+                    log("Successfully set default shortcuts via DSL!", COLOR_SUCCESS)
                 } catch (e: Exception) {
                     log("Failed to set shortcuts: ${e.message}", COLOR_ERROR)
                 }
@@ -84,16 +101,14 @@ class MainActivity : AppCompatActivity() {
         addCustomBtn.setOnClickListener {
             lifecycleScope.launch {
                 try {
-                    val custom = ShortcutInfo(
-                        id = "custom_" + System.currentTimeMillis() % 10000,
-                        shortLabel = "Custom",
-                        icon = ShortcutIcon.System("magnifyingglass"),
-                        deepLinkAction = "kmpshortcuts://custom",
+                    val custom = shortcut("custom_" + System.currentTimeMillis() % 10000) {
+                        shortLabel = "Custom"
+                        icon = ShortcutIcon.System("magnifyingglass")
+                        deepLink = "kmpshortcuts://custom"
                         extras = mapOf("created_at" to System.currentTimeMillis().toString())
-                    )
+                    }
                     KMPShortcuts.manager.addShortcut(custom)
-                    log("Added custom shortcut: ${custom.id}", COLOR_SUCCESS)
-                    updateShortcutsDisplay()
+                    log("Added custom shortcut via DSL builder: ${custom.id}", COLOR_SUCCESS)
                 } catch (e: Exception) {
                     log("Failed to add shortcut: ${e.message}", COLOR_ERROR)
                 }
@@ -105,7 +120,6 @@ class MainActivity : AppCompatActivity() {
                 try {
                     KMPShortcuts.manager.removeShortcut("run_tests")
                     log("Removed shortcut 'run_tests' (if it existed)", COLOR_SUCCESS)
-                    updateShortcutsDisplay()
                 } catch (e: Exception) {
                     log("Failed to remove shortcut: ${e.message}", COLOR_ERROR)
                 }
@@ -116,12 +130,11 @@ class MainActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 try {
                     if (KMPShortcuts.manager.isPinSupported()) {
-                        val pinInfo = ShortcutInfo(
-                            id = "pinned_shortcut",
-                            shortLabel = "Pinned",
-                            icon = ShortcutIcon.System("star"),
-                            deepLinkAction = "kmpshortcuts://pinned"
-                        )
+                        val pinInfo = shortcut("pinned_shortcut") {
+                            shortLabel = "Pinned"
+                            icon = ShortcutIcon.System("star")
+                            deepLink = "kmpshortcuts://pinned"
+                        }
                         val requested = KMPShortcuts.manager.requestPin(pinInfo)
                         log("Requested shortcut pinning (success=$requested)", COLOR_SUCCESS)
                     } else {
@@ -129,6 +142,30 @@ class MainActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     log("Failed to request pin: ${e.message}", COLOR_ERROR)
+                }
+            }
+        }
+
+        incrementBadgeBtn.setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    val current = KMPShortcuts.badge.getBadgeCount()
+                    val next = current + 1
+                    KMPShortcuts.badge.setBadgeCount(next)
+                    log("Incremented badge count to: $next (getBadgeCount()=${KMPShortcuts.badge.getBadgeCount()})", COLOR_SUCCESS)
+                } catch (e: Exception) {
+                    log("Failed to update badge: ${e.message}", COLOR_ERROR)
+                }
+            }
+        }
+
+        clearBadgeBtn.setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    KMPShortcuts.badge.clearBadge()
+                    log("Cleared badge count (getBadgeCount()=${KMPShortcuts.badge.getBadgeCount()})", COLOR_SUCCESS)
+                } catch (e: Exception) {
+                    log("Failed to clear badge: ${e.message}", COLOR_ERROR)
                 }
             }
         }
@@ -242,6 +279,34 @@ class MainActivity : AppCompatActivity() {
             layoutParams = params
         }
         container.addView(pinBtn)
+
+        incrementBadgeBtn = Button(context).apply {
+            text = "Increment Badge"
+            setBackgroundColor(Color.parseColor("#21262D"))
+            setTextColor(Color.WHITE)
+            textSize = 13f
+            val params = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(0, 0, 0, 12)
+            layoutParams = params
+        }
+        container.addView(incrementBadgeBtn)
+
+        clearBadgeBtn = Button(context).apply {
+            text = "Clear Badge"
+            setBackgroundColor(Color.parseColor("#21262D"))
+            setTextColor(Color.WHITE)
+            textSize = 13f
+            val params = android.widget.LinearLayout.LayoutParams(
+                android.widget.LinearLayout.LayoutParams.MATCH_PARENT,
+                android.widget.LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            params.setMargins(0, 0, 0, 12)
+            layoutParams = params
+        }
+        container.addView(clearBadgeBtn)
 
         logView = TextView(context).apply {
             textSize = 11f

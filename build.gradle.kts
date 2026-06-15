@@ -10,7 +10,7 @@ plugins {
     alias(libs.plugins.dokka)                apply false
 }
 
-val versionName = properties["VERSION_NAME"]?.toString() ?: "0.1.0-alpha04"
+val versionName = properties["VERSION_NAME"]?.toString() ?: "0.1.0-beta01"
 val groupId     = properties["GROUP"]?.toString()        ?: "com.neuralheads"
 
 allprojects {
