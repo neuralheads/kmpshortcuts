@@ -3,6 +3,7 @@
 package io.neuralheads.kmpshortcuts
 
 import kotlinx.coroutines.suspendCancellableCoroutine
+import platform.Foundation.NSNumber
 import platform.UserNotifications.UNAuthorizationOptionBadge
 import platform.UserNotifications.UNMutableNotificationContent
 import platform.UserNotifications.UNNotificationRequest
@@ -56,7 +57,7 @@ class IOSShortcutBadge : ShortcutBadge {
 
         val center = UNUserNotificationCenter.currentNotificationCenter()
         val content = UNMutableNotificationContent().apply {
-            setBadge(safeCount)
+            setBadge(NSNumber.numberWithInt(safeCount))
         }
         val request = UNNotificationRequest.requestWithIdentifier(
             identifier = NOTIFICATION_ID,
